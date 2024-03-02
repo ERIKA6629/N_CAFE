@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   scope module: :public do
     get '/' => 'homes#top', as: 'public_top'
     get '/access' => 'homes#access'
+    
+    get '/my_page' => 'customers#show'
   end
   
   namespace :admin do

@@ -1,0 +1,12 @@
+<h2>マイページ</h2>
+<p>登録内容</p>
+<p>会員ID</p>
+<%= @customer.id %>
+<p>氏名</p>
+<%= @customer.last_name + " " + @customer.first_name %>
+<p>フリガナ</p>
+<%= @customer.last_name_kana + " " + @customer.first_name_kana %>
+<p>電話番号</p>
+<%= @customer.telephone_number %>
+<p>メールアドレス</p>
+<%= @customer.email %>
