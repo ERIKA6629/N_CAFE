@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NCafe</title>
+    <title>N CAFE</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,14 +14,32 @@
     <header>
       <% if admin_signed_in? %>
         <li>
+          <%= link_to "Access", access_path %>
+        </li>
+        <li>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+      <% elsif customer_signed_in? %>
+        <li>
+          <%= link_to "Access", access_path %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
       <% else %>
         <li>
-          <%= link_to "ログイン", new_admin_session_path %>
+          <%= link_to "Access", access_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_customer_session_path %>
         </li>
       <% end %>
     </header>
+    
     <%= yield %>
+  
+    <footer>
+      <p>N CAFE ・営業時間 10:00〜18:00 ・定休日 木曜 since 2020</p>
+    </footer>
   </body>
 </html>
