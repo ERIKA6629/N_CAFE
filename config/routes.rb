@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get '/access' => 'homes#access'
     
     get '/my_page' => 'customers#show'
+    get '/information/edit' => 'customers#edit'
+    patch '/information' => 'customers#update'
   end
   
   namespace :admin do

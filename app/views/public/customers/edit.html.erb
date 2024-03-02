@@ -1,0 +1,29 @@
+<h2>会員情報編集</h2>
+
+  <% if @customer.errors.any? %>
+    <%= @customer.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @customer, url: information_path(@customer.id), method: :patch do |f| %>
+    <p>氏名</p>
+    <%= f.text_field :last_name %>
+    <%= f.text_field :first_name %>
+    
+    <p>フリガナ</p>
+    <%= f.text_field :last_name_kana %>
+    <%= f.text_field :first_name_kana %>
+    
+    <p>電話番号（ハイフンなし）</p>
+    <%= f.text_field :telephone_number %>
+    
+    <p>メールアドレス</p>
+    <%= f.email_field :email %>
+    
+    <%= f.submit '編集内容を保存する' %>
+    
+  <% end %>

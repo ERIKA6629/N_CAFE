@@ -1,4 +1,10 @@
 <h2>マイページ</h2>
+
+<p>ポイント</p>
+<p>1回ご来店につき1ポイントプレゼント！</p>
+<p>※お会計の際にマイページをご提示ください</p>
+現在のポイントは<%= @customer.points %>Pt
+
 <p>登録内容</p>
 <p>会員ID</p>
 <%= @customer.id %>
@@ -9,4 +15,6 @@
 <p>電話番号</p>
 <%= @customer.telephone_number %>
 <p>メールアドレス</p>
-<%= @customer.email %>
+<%= @customer.email %><br>
+
+<%= link_to "編集", information_edit_path %>
