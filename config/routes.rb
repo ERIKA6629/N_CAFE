@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     post 'customers/sign_up' => 'public/registrations#create', as: 'customer_registration'
   end
   
+  devise_scope :customer do
+    post 'guest_sign_in' => 'public/sessions#guest_sign_in'
+  end
+  
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -18,10 +22,14 @@ Rails.application.routes.draw do
     get '/my_page' => 'customers#show'
     get '/information/edit' => 'customers#edit'
     patch '/information' => 'customers#update'
+    get '/unsubscribe' => 'customers#unsubscribe'
+    patch '/withdraw' => 'customers#withdraw'
   end
   
   namespace :admin do
     get '/' => 'homes#top'
+    resources :customers, only: [:index, :show, :edit, :update]
   end
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

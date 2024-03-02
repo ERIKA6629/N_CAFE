@@ -18,6 +18,13 @@ class Public::CustomersController < ApplicationController
     end
   end
   
+  def withdraw
+    customer = Customer.find(current_customer.id)
+    customer.update(is_active: false)
+    reset_session
+    redirect_to new_customer_registration_path
+  end
+  
   private
   
   def customer_params

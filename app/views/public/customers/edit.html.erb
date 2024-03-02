@@ -22,8 +22,9 @@
     <%= f.text_field :telephone_number %>
     
     <p>メールアドレス</p>
-    <%= f.email_field :email %>
+    <%= f.email_field :email %><br>
     
     <%= f.submit '編集内容を保存する' %>
+    <%= link_to "退会する", unsubscribe_path %>
     
   <% end %>
