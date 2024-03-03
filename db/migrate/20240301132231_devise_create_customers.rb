@@ -19,7 +19,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :last_name_kana, null: false
       t.string :first_name_kana, null: false
       t.string :telephone_number, null: false
-      t.integer :points, null: false, default: 0
+      
       t.boolean :is_active, null: false, default: true
       
       ## Trackable

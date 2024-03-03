@@ -39,9 +39,14 @@
         <li>
           <%= link_to "ゲストログイン", guest_sign_in_path, method: :post %>
         </li>
-        
       <% end %>
     </header>
+    
+    <div>
+      <% if flash.now[:notice] %>
+        <%= notice %>
+      <% end %>
+    </div>
     
     <%= yield %>
   
