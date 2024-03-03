@@ -24,5 +24,9 @@ class Customer < ApplicationRecord
         customer.telephone_number = "99999999999"
       end
     end
+    
+    def guest_user?
+      email == GUEST_USER_EMAIL
+    end
   
 end
