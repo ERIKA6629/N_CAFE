@@ -1,0 +1,10 @@
+<h2>検索結果</h2>
+<p>会員ID</p>
+<%= link_to admin_customer_path(@customer.id) do %>
+  <%= @customer.id %>
+<% end %>
+<p>氏名</p>
+<%= @customer.last_name_kana %>
+<%= @customer.first_name_kana %>
+
+<%= link_to "一覧に戻る", admin_customers_path %>

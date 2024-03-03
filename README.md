@@ -35,3 +35,6 @@
 ## 使用素材
  フリーイラスト素材として以下を使用
 　Unsplash(https://unsplash.com/ja)
+　
+　アイコン作成として以下を使用
+　ICOOON MONO(http://icooon-mono.com/)

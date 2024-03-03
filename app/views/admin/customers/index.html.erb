@@ -1,0 +1,33 @@
+<h2>会員一覧</h2>
+
+<%= form_with url: admin_search_path, method: :get do |f| %>
+  <%= f.text_field :id, placeholder: "IDで検索" %>
+  <%= f.submit "検索" %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th colspan="2">氏名カナ</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+            <%= customer.id %>
+          <% end %>
+        </td>
+        <td><%= customer.last_name_kana %></td>
+        <td><%= customer.first_name_kana %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.is_active ? '有効' : '退会' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @customers %>

@@ -1,0 +1,21 @@
+<%= @customer.last_name + @customer.first_name + "様"%>
+
+<p>会員ID</p>
+<%= @customer.last_name %>
+<%= @customer.first_name %>
+
+<p>フリガナ</p>
+<%= @customer.last_name_kana %>
+<%= @customer.first_name_kana %>
+
+<p>電話番号</p>
+<%= @customer.telephone_number %>
+
+<p>メールアドレス</p>
+<%= @customer.email %>
+
+<p>ステータス</p>
+<%= @customer.is_active ? '有効' : '退会' %>
+
+<h2>ポイント</h2>
+<h2>クーポン</h2>

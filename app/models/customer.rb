@@ -28,5 +28,7 @@ class Customer < ApplicationRecord
     def guest_user?
       email == GUEST_USER_EMAIL
     end
+    
+    
   
 end
