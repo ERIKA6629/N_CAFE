@@ -27,7 +27,7 @@
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
         </li>
       <% elsif customer_signed_in? %>
-        <%= link_to public_top_path do %>
+        <%= link_to cafe_information_path do %>
           <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
         <% end %>
         <li>
@@ -40,7 +40,9 @@
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
       <% else %>
-        <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+        <%= link_to public_top_path do %>
+          <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+        <% end %>
         <li>
           <%= link_to "Access", access_path %>
         </li>

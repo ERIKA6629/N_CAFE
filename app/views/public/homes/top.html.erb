@@ -1,3 +1,13 @@
-<p>座席状況</p>
+<p>ようこそ N CAFEへ</p>
+<p>予定の合間にちょこっと利用していただけるよう</p>
+<p>空席情報をご覧いただけます。</p>
 
-<%= image_tag 'seat.jpeg', style: "width:500px;" %>
+<p>ランチやスイーツもご用意していますので</p>
+<p>お昼時をのんびり過ごしたい方にも</p>
+
+<p>いろんな方にとって</p>
+<p>ちょうど良いCAFEを目指しています。</p>
+
+<%= link_to "新規登録", new_customer_registration_path %>
+<%= link_to "新規登録", new_customer_session_path %>
+<%= link_to "ゲストログイン", guest_sign_in_path, method: :post %>

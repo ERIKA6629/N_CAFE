@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   scope module: :public do
     get '/' => 'homes#top', as: 'public_top'
     get '/access' => 'homes#access'
+    get '/cafe_information' => 'homes#cafe_information'
     
     get '/my_page' => 'customers#show'
     get '/information/edit' => 'customers#edit'

@@ -5,17 +5,17 @@ class Public::SessionsController < Devise::SessionsController
   before_action :customer_state, only: [:create]
   
   def after_sign_in_path_for(resource)
-    public_top_path
+    cafe_information_path
   end
   
   def after_sign_out_path_for(resource)
-    new_customer_session_path
+    public_top_path
   end
   
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
-    redirect_to public_top_path(customer), notice: "guestとしてログインしました。"
+    redirect_to cafe_information_path(customer), notice: "guestとしてログインしました。"
   end
   # GET /resource/sign_in
   # def new
@@ -45,7 +45,11 @@ class Public::SessionsController < Devise::SessionsController
     customer = Customer.find_by(email: params[:customer][:email])
     return if customer.nil?
     return unless customer.valid_password?(params[:customer][:password])
-    redirect_to new_customer_registration_path
+    if customer.is_active == true
+      return
+    else
+      redirect_to new_customer_registration_path
+    end
   end
   
 end
