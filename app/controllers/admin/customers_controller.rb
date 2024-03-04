@@ -10,7 +10,12 @@ class Admin::CustomersController < ApplicationController
   end
   
   def search
-    @customer = Customer.find(params[:id])
+    if Customer.find_by(id: params[:id]).present?
+      redirect_to admin_customer_path(params[:id])
+    else
+      @customers = Customer.page(params[:page])
+      redirect_to admin_customers_path, notice: '検索したIDは見つかりませんでした。'
+    end
   end
   
 end
