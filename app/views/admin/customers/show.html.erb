@@ -17,7 +17,9 @@
 <%= @customer.email %>
 
 <p>ステータス</p>
-<%= @customer.is_active ? '有効' : '退会' %>
+<%= @customer.is_active ? '有効' : '退会' %><br>
+
+<%= link_to "編集", edit_admin_customer_path(@customer.id) %>
 
 <h2>ポイント</h2>
 <h2>クーポン</h2>

@@ -1,1 +1,17 @@
-top
+<h2>座席状況</h2>
+
+<table>
+  <thead>
+    <th>座席番号</th>
+    <% @reservation_times.each do |reservation_time| %>
+      <th><%= reservation_time.start_at %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @seats.each do |seat| %>
+      <tr>
+        <td><%= seat.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
