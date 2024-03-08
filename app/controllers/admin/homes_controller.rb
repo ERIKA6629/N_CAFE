@@ -4,6 +4,7 @@ class Admin::HomesController < ApplicationController
   def top
     @reservation_times = ReservationTime.all
     @seats = Seat.all
+    @reservations = Reservation.all
   end
 
 end

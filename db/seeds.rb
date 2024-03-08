@@ -20,3 +20,14 @@ reservation_time_data = [ ["10:00", "10:29"], ["10:30", "10:59"], ["11:00", "11:
 reservation_time_data.each do |data|
   ReservationTime.create!(start_at: data[0], end_at: data[1])
 end
+
+Customer.create!(
+  last_name: 'admin',
+  first_name: 'admin',
+  last_name_kana: 'アドミン',
+  first_name_kana: 'アドミン',
+  email: 'n_cafe@example.com',
+  password: 'n_cafe1',
+  telephone_number: '00000000000'
+  
+  )

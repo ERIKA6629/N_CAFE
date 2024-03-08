@@ -1,0 +1,14 @@
+<h2>管理者による座席予約</h2>
+
+<%= form_with model: @reservation, url: admin_reservations_path do |f| %>
+  座席<%= @reservation.seat.name %>
+  <%= @reservation.start_time %><br>
+  <%= @reservation.reservation_time.start_at %><br>
+  <p>予約者 管理者</p>
+  予約人数<%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人<br>
+  コメント<%= f.text_field :comment %><br>
+  <%= f.hidden_field :seat_id, :value => @reservation.seat.id %>
+  <%= f.hidden_field :reservation_time_id, :value => @reservation.reservation_time.id %>
+  <%= f.hidden_field :start_time, :value => @reservation.start_time %>
+  <%= f.submit '追加' %>
+<% end %>
