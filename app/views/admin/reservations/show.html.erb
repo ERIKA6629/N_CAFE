@@ -1,0 +1,14 @@
+<h2>予約済み座席の詳細</h2>
+
+<%= l @reservation.start_time, format: :long %>
+<%= @reservation.reservation_time.start_at %>〜
+<p>予約者</p>
+<%= link_to admin_customer_path(@reservation.customer_id) do %>
+  <%= @reservation.customer.last_name_kana %>様
+<% end %>
+<p>予約人数</p>
+<%= @reservation.number_of_people %>人
+<p>コメント</p>
+<%= @reservation.comment %><br>
+
+<%= link_to "変更", edit_admin_reservation_path %>

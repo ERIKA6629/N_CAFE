@@ -2,7 +2,7 @@
 
 <%= form_with model: @reservation, url: admin_reservations_path do |f| %>
   座席<%= @reservation.seat.name %>
-  <%= @reservation.start_time %><br>
+  <%= l @reservation.start_time, format: :long %><br>
   <%= @reservation.reservation_time.start_at %><br>
   <p>予約者 管理者</p>
   予約人数<%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人<br>

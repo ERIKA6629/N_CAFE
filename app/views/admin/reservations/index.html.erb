@@ -5,6 +5,8 @@
   <%= f.submit '表示' %>
 <% end %>
 
+<%= l @display_date, format: :long %>
+
 <table>
   <thead>
     <th>座席番号</th>
@@ -18,14 +20,15 @@
         <td><%= seat.name %></td>
         <% @reservation_times.each do |reservation_time| %>
           <td>
-              <% if @reservations.display(seat.id, reservation_time.id).nil? %>
-                <%= form_with model: @reservations, url: new_admin_reservation_path(@reservations), method: :get do |f| %>
+              <% if Reservation.display(seat.id, reservation_time.id, @display_date).nil? %>
+                <%= form_with model: @reservations, url: new_admin_reservation_path, method: :get do |f| %>
                   <%= f.hidden_field :seat_id, :value => seat.id %>
                   <%= f.hidden_field :reservation_time_id, :value => reservation_time.id %>
+                  <%= f.hidden_field :start_time, :value => @display_date %>
                   <%= f.submit '空' %>
                 <% end %>
               <% else %>
-                まる
+                <%= link_to "⚪︎", admin_reservation_path(Reservation.display(seat.id, reservation_time.id, @display_date)) %>
               <% end %>
           </td>
         <% end %>

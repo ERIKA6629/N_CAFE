@@ -3,20 +3,47 @@ class Admin::ReservationsController < ApplicationController
   
   def new
     @reservation = Reservation.new(reservation_params)
-    @reservation.start_time = Date.today
   end
   
   def create
     reservation = Reservation.new(reservation_params)
     reservation.customer_id = 1
     reservation.save!
-    redirect_to admin_path
+    redirect_to admin_reservation_path(reservation.id)
+  end
+  
+  def index
+    @display_date = Date.today
+    @reservation_times = ReservationTime.all
+    @seats = Seat.all
+    @reservations = Reservation.where(start_time: @display_date).all
   end
   
   def search
-    @reservations = Reservation.where(start_time: reservation_time_get_params[:start_time])
+    @display_date = reservation_time_get_params[:start_time].to_date
+    @reservations = Reservation.all
     @reservation_times = ReservationTime.all
     @seats = Seat.all
+    render :index
+  end
+  
+  def show
+    @reservation = Reservation.find(params[:id])
+  end
+  
+  def edit
+    @reservation = Reservation.find(params[:id])
+  end
+  
+  def update
+    reservation = Reservation.find(params[:id])
+    reservation.update!(reservation_params)
+    redirect_to admin_reservation_path(reservation.id)
+  end
+  
+  def destroy
+    reservation = Reservation.find(params[:id])
+    reservation.destroy
     redirect_to admin_path
   end
   
@@ -29,4 +56,6 @@ class Admin::ReservationsController < ApplicationController
   def reservation_time_get_params
     params.require(:reservation).permit(:start_time)
   end
+  
+  
 end

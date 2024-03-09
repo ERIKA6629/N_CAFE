@@ -1,0 +1,15 @@
+<h2>予約済み座席の編集</h2>
+
+<%= form_with model: @reservation, url: admin_reservation_path, method: :patch do |f| %>
+  <%= l @reservation.start_time, format: :long %>
+  <!--<%= f.collection_select :reservation_time_id, ReservationTime.all, :id, :start_at %>-->
+  <%= @reservation.reservation_time.start_at %>〜
+  <p>予約者</p>
+  <%= @reservation.customer.last_name + @reservation.customer.first_name %>様
+  <p>予約人数</p>
+  <%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人
+  <p>コメント</p>
+  <%= f.text_field :comment %><br>
+  <%= f.submit'変更' %>
+  <%= link_to 'キャンセル', admin_reservation_path(@reservation.id), method: :delete, "data-confirm" => "本当にキャンセルしますか？データは削除されます。" %>
+<% end %>
