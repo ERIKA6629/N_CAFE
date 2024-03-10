@@ -1,5 +1,8 @@
 <p>座席状況</p>
-<%= l Date.today, format: :long %>時点
+<%= @display_date.strftime("%Y年%m月%d日%-H時%m分")%>時点
+<% if @open_time == false %>
+<p>現在は営業時間外です。表示は翌営業日10:00の座席状況です。</p>
+<% end %>
 <table>
   <thead>
     <% @seats.each do |seat| %>
@@ -12,13 +15,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
-      <td>⚪︎</td>
+    <% @seats.each do |seat| %>
+      <% if @reservations.display_reservation(seat.id, @reservation_time.id, @display_date).nil? %>
+        <td>×</td>
+      <% else %>
+        <td>⚪︎</td>
+      <% end %>
+    <% end %>
     </tr>
   </tbody>
 </table>
