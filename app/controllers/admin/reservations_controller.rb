@@ -6,25 +6,21 @@ class Admin::ReservationsController < ApplicationController
   end
   
   def create
-    reservation = Reservation.new(reservation_params)
-    reservation.customer_id = 1
-    reservation.save!
-    redirect_to admin_reservation_path(reservation.id)
+    @customer = Customer.admin
+    @reservation = @customer.reservations.build(reservation_params)
+    @reservation.save!
+    redirect_to admin_reservation_path(@reservation)
   end
   
   def index
-    @display_date = Date.today
+    if params[:display_date].present?
+      @display_date = Time.zone.parse("#{params[:display_date]} 00:00:00").to_date
+    else
+      @display_date = Time.current.to_date
+    end
     @reservation_times = ReservationTime.all
     @seats = Seat.all
-    @reservations = Reservation.where(start_time: @display_date).all
-  end
-  
-  def search
-    @display_date = reservation_time_get_params[:start_time].to_date
     @reservations = Reservation.all
-    @reservation_times = ReservationTime.all
-    @seats = Seat.all
-    render :index
   end
   
   def show
@@ -52,10 +48,5 @@ class Admin::ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:customer_id, :seat_id, :reservation_time_id, :start_time, :comment, :number_of_people)
   end
-  
-  def reservation_time_get_params
-    params.require(:reservation).permit(:start_time)
-  end
-  
   
 end

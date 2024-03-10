@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
   
   validates :number_of_people, presence: true
   
-  def self.display(seat, reservation_time, start_time)
+  def self.display_reservation(seat, reservation_time, start_time)
     find_by(seat_id: seat, reservation_time_id: reservation_time, start_time: start_time)
   end
   

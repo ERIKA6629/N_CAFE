@@ -14,8 +14,12 @@
     <header>
             
       <% if admin_signed_in? %>
-        <%= link_to admin_path do %>
-          <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+        <% if content_for?(:admin_path_with_date) %>
+          <%= yield(:admin_path_with_date) %>
+        <% else %>
+          <%= link_to admin_path do %>
+            <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+          <% end %>
         <% end %>
         <li>
           <%= link_to "アクセス", access_path %>

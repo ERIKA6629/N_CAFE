@@ -25,13 +25,13 @@ Rails.application.routes.draw do
     patch '/information' => 'customers#update'
     get '/unsubscribe' => 'customers#unsubscribe'
     patch '/withdraw' => 'customers#withdraw'
+    resources :reservations, except: [:show]
   end
   
   namespace :admin do
     get '/' => 'reservations#index'
     get '/search' => 'customers#search'
     resources :customers, only: [:index, :show, :edit, :update]
-    get '/reservation/search' => 'reservations#search'
     resources :reservations, except: [:index]
   end
   

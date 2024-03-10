@@ -1,3 +1,9 @@
+<% content_for(:admin_path_with_date) do %>
+  <%= link_to admin_path(display_date: @reservation.start_time) do %>
+    <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+  <% end %>
+<% end %>
+
 <h2>予約済み座席の詳細</h2>
 
 <%= l @reservation.start_time, format: :long %>

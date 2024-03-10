@@ -1,3 +1,26 @@
 <p>座席状況</p>
+<%= l Date.today, format: :long %>時点
+<table>
+  <thead>
+    <% @seats.each do |seat| %>
+      <th>
+        <%= link_to reservations_path(seat_id: seat.id) do %>
+          <%= seat.name %>
+        <% end %>
+      </th>
+    <% end %>
+  </thead>
+  <tbody>
+    <tr>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+      <td>⚪︎</td>
+    </tr>
+  </tbody>
+</table>
 
 <%= image_tag 'seat.jpeg', style: "width:500px;" %>

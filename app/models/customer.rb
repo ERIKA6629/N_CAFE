@@ -4,6 +4,8 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  scope :admin, -> { find_by(email: 'n_cafe@example.com') }
+  
   has_many :reservations
          
   validates :email, uniqueness: true
@@ -16,21 +18,19 @@ class Customer < ApplicationRecord
   
   GUEST_USER_EMAIL = "guest@example.com"
   
-    def self.guest
-      find_or_create_by!(email: GUEST_USER_EMAIL) do |customer|
-        customer.password = SecureRandom.urlsafe_base64
-        customer.last_name = "guest"
-        customer.first_name = "user"
-        customer.last_name_kana = "ゲスト"
-        customer.first_name_kana = "ユーザー"
-        customer.telephone_number = "99999999999"
-      end
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.last_name = "guest"
+      customer.first_name = "user"
+      customer.last_name_kana = "ゲスト"
+      customer.first_name_kana = "ユーザー"
+      customer.telephone_number = "99999999999"
     end
-    
-    def guest_user?
-      email == GUEST_USER_EMAIL
-    end
-    
-    
+  end
+  
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
   
 end
