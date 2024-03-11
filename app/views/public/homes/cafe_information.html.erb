@@ -1,8 +1,13 @@
 <p>座席状況</p>
-<%= @display_date.strftime("%Y年%m月%d日%-H時%m分")%>時点
-<% if @open_time == false %>
-<p>現在は営業時間外です。表示は翌営業日10:00の座席状況です。</p>
+<%= @display_date.strftime("%Y年%m月%d日%-H時%M分")%>時点
+<% if @reservation_time.business_hours == "after_closing" %>
+  <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
+<% elsif @reservation_time.business_hours == "opne_n_cafe" %>
+  営業中です。<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。
+<% elsif @@reservation_time.business_hours == "before_opening" %>
+  <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
 <% end %>
+
 <table>
   <thead>
     <% @seats.each do |seat| %>
@@ -16,7 +21,7 @@
   <tbody>
     <tr>
     <% @seats.each do |seat| %>
-      <% if @reservations.display_reservation(seat.id, @reservation_time.id, @display_date).nil? %>
+      <% if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
         <td>×</td>
       <% else %>
         <td>⚪︎</td>

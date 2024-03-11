@@ -1,4 +1,10 @@
 ja:
+  enums:
+    reservation_time:
+      business_hours:
+        before_opening: "営業時間前"
+        open_n_cafe: "営業中"
+        after_closing: "営業時間後"
   activerecord:
     errors:
       messages:

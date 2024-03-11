@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2024_03_05_123256) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "start_at"
     t.string "end_at"
+    t.integer "business_hours"
   end
 
   create_table "reservations", force: :cascade do |t|

@@ -6,6 +6,7 @@ class CreateReservationTimes < ActiveRecord::Migration[6.1]
       
       t.string :start_at
       t.string :end_at
+      t.integer :business_hours
     end
   end
 end
