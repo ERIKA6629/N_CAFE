@@ -1,9 +1,13 @@
 <p>座席状況</p>
 <%= @display_date.strftime("%Y年%m月%d日%-H時%M分")%>時点
-<% if @reservation_time.business_hours == "after_closing" %>
+<% if Date.today.wday == 4 %><%# 木曜 %>
+  <p>本日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
+<% elsif @reservation_time.business_hours == "after_closing" &&  Date.today.wday == 3 %><%# 水曜営業時間外 %>
+  <p>現在は営業時間外です。また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
+<% elsif @reservation_time.business_hours == "after_closing" %>
   <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
 <% elsif @reservation_time.business_hours == "opne_n_cafe" %>
-  営業中です。<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。
+  営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。
 <% elsif @@reservation_time.business_hours == "before_opening" %>
   <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
 <% end %>
@@ -22,9 +26,9 @@
     <tr>
     <% @seats.each do |seat| %>
       <% if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
-        <td>×</td>
-      <% else %>
         <td>⚪︎</td>
+      <% else %>
+        <td>×</td>
       <% end %>
     <% end %>
     </tr>
