@@ -1,6 +1,6 @@
 <h2>予約一覧</h2>
 <%= @seat.name %>の座席予約
-<p>1枠30分で予約をお取りいただけます。必要な枠数分ご予約ください。</p>
-<%= week_calendar do |date| %>
+<p>現在より先の予約を、1枠30分でお取りいただけます。必要な枠数分ご予約ください。</p>
+<%= week_calendar events: @reservations do |date, reservation| %>
 　<%= date.day %>
 <% end %>

@@ -24,4 +24,5 @@ class ReservationTime < ApplicationRecord
     end
     arr[0]
   end
+  
 end

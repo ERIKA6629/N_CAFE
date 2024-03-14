@@ -1,8 +1,8 @@
 <p>座席状況</p>
 <%= @display_date.strftime("%Y年%m月%d日%-H時%M分")%>時点
-<% if Date.today.wday == 4 %><%# 木曜 %>
+<% if Date.today.wday == @non_business_day %><%# 木曜 %>
   <p>本日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
-<% elsif @reservation_time.business_hours == "after_closing" &&  Date.today.wday == 3 %><%# 水曜営業時間外 %>
+<% elsif @reservation_time.business_hours == "after_closing" &&  Date.today.wday == @before_non_buisiness_day %><%# 水曜営業時間外 %>
   <p>現在は営業時間外です。また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
 <% elsif @reservation_time.business_hours == "after_closing" %>
   <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
@@ -11,6 +11,8 @@
 <% elsif @@reservation_time.business_hours == "before_opening" %>
   <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
 <% end %>
+
+<p>座席番号から、各座席の詳細をご覧になれます。</p>
 
 <table>
   <thead>
