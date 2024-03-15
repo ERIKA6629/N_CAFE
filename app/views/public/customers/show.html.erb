@@ -5,6 +5,34 @@
 <p>※お会計の際にマイページをご提示ください</p>
 現在のポイントはPt
 
+<p>獲得クーポン</p>
+
+<p>予約状況</p>
+<% @reservations.each do |reservation| %>
+  <table>
+    <tr>
+      <td>
+        <%= l reservation.start_time, format: :long %>
+      </td>
+      <td>
+        <%= reservation.reservation_time.start_at + '〜' + reservation.reservation_time.end_at %>
+      </td>
+      <td>
+        <%= reservation.seat.name %>
+      </td>
+      <td>
+        <%= reservation.number_of_people %>名
+      </td>
+      <td>
+        変更
+      </td>
+      <td>
+        キャンセル
+      </td>
+    </tr>
+  </table>
+<% end %>
+
 <p>登録内容</p>
 <p>会員ID</p>
 <%= @customer.id %>

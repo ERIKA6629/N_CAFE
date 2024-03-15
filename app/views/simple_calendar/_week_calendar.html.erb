@@ -44,10 +44,17 @@
                   <td rowspan= "16"><%= '定休日' %></td>
               <% elsif day.wday != @non_business_day %>
                 <% reservation = @reservations.display_reservation(@seat.id, reservation_time.id, day) %>
-                <% if reservation %>
+                <% if reservation && for_showing_reservations(day, reservation_time.start_at) %>
                   <td><%= '×︎' %></td>
                 <% elsif reservation.nil? && for_showing_reservations(day, reservation_time.start_at) %>
-                  <td><%= '◯' %></td>
+                  <td>
+                    <%= form_with model: @reservations, url: new_reservation_path, method: :get do |f| %>
+                      <%= f.hidden_field :seat_id, value: @seat.id %>
+                      <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
+                      <%= f.hidden_field :start_time, value: day %>
+                      <%= f.submit '◯' %>
+                    <% end %>
+                  </td>
                 <% else %>
                   <td><%= ' ' %></td>
                 <% end %>
