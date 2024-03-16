@@ -24,10 +24,10 @@
         <%= reservation.number_of_people %>名
       </td>
       <td>
-        変更
+        <%= link_to "変更", edit_reservation_path(reservation.id) %>
       </td>
       <td>
-        キャンセル
+        <%= link_to 'キャンセル', reservation_path(reservation.id), method: :delete, "data-confirm" => "本当にキャンセルしますか？データは削除されます。" %>
       </td>
     </tr>
   </table>

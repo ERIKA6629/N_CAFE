@@ -7,7 +7,7 @@
 <h2>予約済み座席の詳細</h2>
 
 <%= l @reservation.start_time, format: :long %>
-<%= @reservation.reservation_time.start_at %>〜
+<%= @reservation.reservation_time.start_at + "〜" + @reservation.reservation_time.end_at %>
 <p>予約者</p>
 <% if display_admin(@reservation.customer.email) %>
   <p>管理者</p>

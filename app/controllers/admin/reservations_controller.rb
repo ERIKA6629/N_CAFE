@@ -8,8 +8,11 @@ class Admin::ReservationsController < ApplicationController
   def create
     @customer = Customer.admin
     @reservation = @customer.reservations.build(reservation_params)
-    @reservation.save!
-    redirect_to admin_reservation_path(@reservation)
+    if @reservation.save
+      redirect_to admin_reservation_path(@reservation)
+    else
+      redirect_to admin_path(display_date: @reservation.start_time), notice: '入力内容はすでに予約されています。'
+    end
   end
   
   def index

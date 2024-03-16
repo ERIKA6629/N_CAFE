@@ -1,0 +1,11 @@
+<h2>座席予約変更</h2>
+<p>利用可能人数を超える場合はキャンセル後に座席を変更して予約してください。</p>
+<%= form_with model: @reservation, url: reservation_path, method: :patch do |f| %>
+  日時<%= l @reservation.start_time, format: :long %><br>
+  <%= @reservation.reservation_time.start_at + '〜' + @reservation.reservation_time.end_at %><br>
+  座席<%= @reservation.seat.name %><%= @reservation.seat.limit_number %>名まで利用可<br>
+  予約者<%= current_customer.last_name_kana %><br>
+  予約人数<%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人<br>
+  コメント<%= f.text_field :comment %><br>
+  <%= f.submit '変更する' %>
+<% end %>
