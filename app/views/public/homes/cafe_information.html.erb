@@ -1,15 +1,20 @@
 <p>座席状況</p>
-<%= @display_date.strftime("%Y年%m月%d日%-H時%M分")%>時点
-<% if Date.today.wday == @non_business_day %><%# 木曜 %>
+
+<%= l @display_time, format: :long %>時点
+<% if Date.today.wday == @non_business_day %>
   <p>本日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
-<% elsif @reservation_time.business_hours == "after_closing" &&  Date.today.wday == @before_non_buisiness_day %><%# 水曜営業時間外 %>
-  <p>現在は営業時間外です。また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
-<% elsif @reservation_time.business_hours == "after_closing" %>
-  <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
-<% elsif @reservation_time.business_hours == "opne_n_cafe" %>
-  営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。
-<% elsif @@reservation_time.business_hours == "before_opening" %>
-  <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
+<% elsif @reservation_time %>
+  <p>営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。</p>
+<% else %>
+  <% if @display_time < @open_time %>
+    <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
+  <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
+    <p>現在は営業時間外です。また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
+  <% elsif @display_time >= @close_time %>
+    <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
+  <% else %>
+    ohhhh!
+  <% end %>
 <% end %>
 
 <p>座席番号から、各座席の詳細をご覧になれます。</p>
@@ -27,10 +32,20 @@
   <tbody>
     <tr>
     <% @seats.each do |seat| %>
-      <% if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
-        <td>⚪︎</td>
+      
+      <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
+      <% if Date.today.wday == @non_business_day %>
+        <td><%= tomorrow_seat_result(seat) %></td>
+      <% elsif @reservation_time %>
+        <td><%= now_seat_result(seat, @start_at, @end_at) %></td>
       <% else %>
-        <td>×</td>
+        <% if @display_time < @open_time %>
+          <td><%= next_seat_result(seat) %></td>
+        <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
+          <td><%= day_after_tomorrow_seat_result(seat) %></td>
+        <% elsif @display_time >= @close_time %>
+          <td><%= tomorrow_seat_result(seat) %></td>
+        <% end %>
       <% end %>
     <% end %>
     </tr>
@@ -38,3 +53,4 @@
 </table>
 
 <%= image_tag 'CAFE_seat.jpg', style: "width: 40%;" %>
+<%#= @reservations.inspect %>

@@ -1,7 +1,7 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
     <span class="calendar-title">
-      <%= Date.today.strftime("%Y年%m月") %>
+      <%= start_date.strftime("%Y年%m月") %>
       <%#= t('simple_calendar.week', default: 'Week') %>
       <%#= calendar.week_number %>
       <%# if calendar.number_of_weeks > 1 %>
@@ -21,7 +21,11 @@
       <tr>
         <th>時間</th>
         <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% if I18n.l(day, format: :month) > I18n.l(start_date, format: :month) %>
+            <th><%= '(' + day.strftime("%-m月") + ')' + t('date.abbr_day_names')[day.wday] %></th>
+          <% else %>
+            <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -39,24 +43,45 @@
         <% @reservation_times.each do |reservation_time| %>
           <tr>
             <td><%= reservation_time.start_at + "〜" %></td>
+            
             <% week.each do |day| %>
-              <% if day.wday == @non_business_day && reservation_time.start_at == '10:00' %>
+              <% reservation = @reservations.find_by(seat_id: @seat.id, reservation_time_id: reservation_time.id, start_time: day) %>
+              <% if reservation_time.start_at == "10:00" %>
+                <% if day.wday == @non_business_day %>
                   <td rowspan= "16"><%= '定休日' %></td>
-              <% elsif day.wday != @non_business_day %>
-                <% reservation = @reservations.display_reservation(@seat.id, reservation_time.id, day) %>
-                <% if reservation && for_showing_reservations(day, reservation_time.start_at) %>
-                  <td><%= '×︎' %></td>
-                <% elsif reservation.nil? && for_showing_reservations(day, reservation_time.start_at) %>
-                  <td>
-                    <%= form_with model: @reservations, url: new_reservation_path, method: :get do |f| %>
-                      <%= f.hidden_field :seat_id, value: @seat.id %>
-                      <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
-                      <%= f.hidden_field :start_time, value: day %>
-                      <%= f.submit '◯' %>
-                    <% end %>
-                  </td>
-                <% else %>
+                <% elsif for_showing_reservations(@start_at_obj, day, reservation_time.start_at) %>
                   <td><%= ' ' %></td>
+                <% else %>
+                  <% if reservation.nil? %>
+                    <td>
+                      <%= form_with model: @reservations, url: new_reservation_path, method: :get do |f| %>
+                        <%= f.hidden_field :seat_id, value: @seat.id %>
+                        <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
+                        <%= f.hidden_field :start_time, value: day %>
+                        <%= f.submit '◯' %>
+                      <% end %>
+                    </td>
+                  <% else %>
+                    <td><%= '×' %></td>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% if day.wday == @non_business_day %>
+                <% else %>
+                  <% if for_showing_reservations(@start_at_obj, day, reservation_time.start_at) %>
+                    <td><%= ' ' %></td>
+                  <% elsif reservation %>
+                    <td><%= '×' %></td>
+                  <% elsif reservation.nil? %>
+                    <td>
+                      <%= form_with model: @reservations, url: new_reservation_path, method: :get do |f| %>
+                        <%= f.hidden_field :seat_id, value: @seat.id %>
+                        <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
+                        <%= f.hidden_field :start_time, value: day %>
+                        <%= f.submit '◯' %>
+                      <% end %>
+                    </td>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>

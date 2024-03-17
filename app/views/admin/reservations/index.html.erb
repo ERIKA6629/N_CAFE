@@ -22,7 +22,7 @@
       <tr>
         <td><%= seat.name %></td>
         <% @reservation_times.each do |reservation_time| %>
-        <% reservation = @reservations.display_reservation(seat.id, reservation_time.id, @display_date) %>
+        <% reservation = @reservations.find_by(seat_id: seat, reservation_time_id: reservation_time, start_time: @display_date) %>
           <td>
             <% if reservation.nil? %>
               <%= form_with model: @reservations, url: new_admin_reservation_path, method: :get do |f| %>
