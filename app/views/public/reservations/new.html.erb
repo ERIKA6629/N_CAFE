@@ -6,7 +6,7 @@
   <%= @reservation.reservation_time.start_at + '〜' + @reservation.reservation_time.end_at %><br>
   予約者<%= current_customer.last_name_kana %><br>
   予約人数<%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人<br>
-  コメント<%= f.text_field :comment, placeholder: "ゲストとして予約する場合は、コメント欄にお名前（カタカナ）を入力ください。" %><br>
+  コメント<%= f.text_area :comment, placeholder: "ゲストとして予約する場合は、コメント欄にお名前（カタカナ）を入力ください。" %><br>
   <%= f.hidden_field :seat_id, value: @reservation.seat.id %>
   <%= f.hidden_field :reservation_time_id, value: @reservation.reservation_time.id %>
   <%= f.hidden_field :start_time, value: @reservation.start_time %>
