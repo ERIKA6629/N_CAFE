@@ -1,1 +1,10 @@
 <h2>投稿一覧</h2>
+
+<% @index_posts.each do |index_post| %>
+  <%= link_to admin_post_path(index_post.id) do %>
+    <%= image_tag index_post.image, size: "200x200" %>
+  <% end %><br>
+  <%= index_post.title %><br>
+  <%= index_post.content %><br>
+  <%= l index_post.created_at, format: :long %><br>
+<% end %>

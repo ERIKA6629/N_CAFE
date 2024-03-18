@@ -1,5 +1,10 @@
 ja:
   activerecord:
+    attributes:
+      post:
+        image: 画像
+        title: タイトル
+        content: 本文
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
