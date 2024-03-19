@@ -1,2 +1,7 @@
 <h2>投稿詳細</h2>
+<%= image_tag @show_post.image, size: "200x200" %><br>
+<%= @show_post.title %><br>
+<%= safe_join(@show_post.content.split("\n"),tag(:br)) %><br>
+<%= l @show_post.created_at, format: :long %><br>
 <%= link_to '編集', edit_admin_post_path(@show_post.id) %>
+<%= link_to '削除', admin_post_path(@show_post.id), method: :delete, "data-confirm" => "本当に削除しますか?" %>

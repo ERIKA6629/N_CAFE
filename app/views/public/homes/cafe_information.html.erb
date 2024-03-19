@@ -1,4 +1,4 @@
-<p>座席状況</p>
+<h2>座席状況</h2>
 
 <%= l @display_time, format: :long %>時点
 <% if Date.today.wday == @non_business_day %>
@@ -53,4 +53,10 @@
 </table>
 
 <%= image_tag 'CAFE_seat.jpg', style: "width: 40%;" %>
-<%#= @reservations.inspect %>
+
+<h2>最新情報</h2>
+<% @latest_posts.each do |latest_post| %>
+  <%= image_tag latest_post.image, style: "width: 200px;" %><br>
+  <%= safe_join(latest_post.content.split("\n"),tag(:br)) %><br>
+  <%= l latest_post.created_at, format: :long %><br>
+<% end %>
