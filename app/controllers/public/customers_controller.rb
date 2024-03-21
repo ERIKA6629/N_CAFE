@@ -4,6 +4,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @display_time = Time.current
+    @display_date = @display_time.to_date
     current_minutes =  (I18n.l Time.current, format: :minutes).to_i
     if current_minutes >= 0 && current_minutes < 30
       @start_at_obj = @display_time.beginning_of_hour
@@ -16,7 +17,10 @@ class Public::CustomersController < ApplicationController
     @close_time = Time.zone.parse("#{@display_time.to_date} #{'18:00'}")
     
     @customer = Customer.find(current_customer.id)
-    @reservations = Reservation.where(customer_id: current_customer).where("start_time >= ?", Date.current)
+    @reservations = Reservation.where(customer_id: current_customer).where("start_time >= ?", @display_date)
+    
+    @point = Point.where(customer_id: current_customer.id)
+    @coupon= Coupon.where(customer_id: current_customer.id, is_active: true)
   end
   
   def edit

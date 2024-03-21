@@ -22,4 +22,16 @@
 <%= link_to "編集", edit_admin_customer_path(@customer.id) %>
 
 <h2>ポイント</h2>
+総獲得数：
+<% if @point.empty? %>
+  <%= "0Pt" %>
+<% else %>
+  <%= @point.count %>Pt
+  最終獲得日:<%= l @latest_point.created_at, format: :long %>
+<% end %>
+<%= form_with model: Point.new, url: admin_points_path, method: :post do |f| %>
+  <%= f.hidden_field :customer_id, value: @customer.id %>
+  <%= f.submit 'ポイント付与' %>
+<% end %>
 <h2>クーポン</h2>
+<p>総獲得数</p><%= @coupons.count %>枚

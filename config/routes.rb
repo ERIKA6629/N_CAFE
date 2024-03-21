@@ -32,8 +32,11 @@ Rails.application.routes.draw do
     get '/' => 'reservations#index'
     get '/search' => 'customers#search'
     resources :customers, only: [:index, :show, :edit, :update]
+    post '/create_all' => 'reservations#create_all'
     resources :reservations, except: [:index]
     resources :posts
+    resources :points, only: [:create]
+    resources :coupons, only: [:index, :update]
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

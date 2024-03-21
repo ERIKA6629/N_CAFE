@@ -7,6 +7,8 @@ class Customer < ApplicationRecord
   scope :admin, -> { find_by(email: 'n_cafe@example.com') }
   
   has_many :reservations
+  has_many :points
+  has_many :coupons
          
   validates :email, uniqueness: true
   validates :last_name, presence: true

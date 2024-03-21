@@ -5,7 +5,11 @@
   <!--<%= f.collection_select :reservation_time_id, ReservationTime.all, :id, :start_at %>-->
   <%= @reservation.reservation_time.start_at %>〜
   <p>予約者</p>
-  <%= @reservation.customer.last_name + @reservation.customer.first_name %>様
+  <% if display_admin(@reservation.customer.email) %>
+    <p>管理者</p>
+  <% else %>
+    <%= @reservation.customer.last_name + @reservation.customer.first_name %>様
+  <% end %>
   <p>予約人数</p>
   <%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人
   <p>コメント</p>

@@ -18,21 +18,36 @@
     <% end %>
   </thead>
   <tbody>
+    <% i = 0 %>
     <% @seats.each do |seat| %>
       <tr>
         <td><%= seat.name %></td>
-        <% @reservation_times.each do |reservation_time| %>
-        <% reservation = @reservations.find_by(seat_id: seat, reservation_time_id: reservation_time, start_time: @display_date) %>
-          <td>
-            <% if reservation.nil? %>
-              <%= form_with model: @reservations, url: new_admin_reservation_path, method: :get do |f| %>
-                <%= f.hidden_field :seat_id, value: seat.id %>
-                <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
-                <%= f.hidden_field :start_time, value: @display_date %>
-                <%= f.submit '空' %>
+        <% if @display_date.wday == @non_business_day %>
+          <% if i == 0 %>
+            <td rowspan="7"><%= "定休日" %></td>
+            <% i += 1 %>
+          <% end %>
+        <% else %>
+          <% @reservation_times.each do |reservation_time| %>
+          <% reservation = @reservations.find_by(seat_id: seat, reservation_time_id: reservation_time, start_time: @display_date) %>
+            <td>
+              <% if reservation.nil? %>
+                <%= form_with model: @reservations, url: new_admin_reservation_path, method: :get do |f| %>
+                  <%= f.hidden_field :seat_id, value: seat.id %>
+                  <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
+                  <%= f.hidden_field :start_time, value: @display_date %>
+                  <%= f.submit '空' %>
+                <% end %>
+              <% else %>
+                <%= link_to "⚪︎", admin_reservation_path(reservation) %>
               <% end %>
-            <% else %>
-              <%= link_to "⚪︎", admin_reservation_path(reservation) %>
+            </td>
+          <% end %>
+          <td>
+            <%= form_with model: @reservations, url: admin_create_all_path, method: :post do |f| %>
+              <%= f.hidden_field :seat_id, value: seat.id %>
+              <%= f.hidden_field :start_time, value: @display_date %>
+              <%= f.submit '一括予約' %>
             <% end %>
           </td>
         <% end %>

@@ -7,6 +7,9 @@ class Admin::CustomersController < ApplicationController
   
   def show
     @customer = Customer.find(params[:id])
+    @point = Point.where(customer_id: params[:id])
+    @latest_point = @point.last
+    @coupons = Coupon.where(customer_id: params[:id], is_active: true)
   end
   
   def edit

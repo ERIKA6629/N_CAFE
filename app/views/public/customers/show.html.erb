@@ -3,13 +3,26 @@
 <p>ポイント</p>
 <p>1回ご来店につき1ポイントプレゼント！</p>
 <p>※お会計の際にマイページをご提示ください</p>
-現在のポイントはPt
+<% if @point.empty? %>
+  <%= "0Pt" %>
+<% else %>
+  <%= @point.count %>Pt
+<% end %>
 
 <p>獲得クーポン</p>
-
+<p>次回お会計時にご利用可　※お会計の際にマイページをご提示ください</p>
+  <% if @coupon.empty? %>
+    <%= "まだ獲得されていません" %>
+  <% else %>
+    <%= @coupon.count %>枚
+  <% end %>
 <p>予約状況</p>
+<% if @reservations.empty? %>
+  <p>予約はありません。</p>
+<% end %>
 <% @reservations.each do |reservation| %>
-  <% if @start_at_obj <= reservation.start_time %>
+  <% reservation_time = Time.zone.parse("#{reservation.start_time} #{reservation.reservation_time.start_at}") %>
+  <% if @start_at_obj <= reservation_time %>
     <table>
       <tr>
         <td>
