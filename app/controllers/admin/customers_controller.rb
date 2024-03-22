@@ -10,6 +10,7 @@ class Admin::CustomersController < ApplicationController
     @point = Point.where(customer_id: params[:id])
     @latest_point = @point.last
     @coupons = Coupon.where(customer_id: params[:id], is_active: true)
+    @latest_coupon = @coupons.last
   end
   
   def edit

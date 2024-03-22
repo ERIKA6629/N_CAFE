@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  after_update :check_customer_is_active
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -33,6 +34,17 @@ class Customer < ApplicationRecord
   
   def guest_user?
     email == GUEST_USER_EMAIL
+  end
+  
+  def check_customer_is_active
+    if is_active == false
+      Point.where(customer_id: id).destroy_all
+      coupons = Coupon.where(customer_id: id, is_active: true)
+      coupons.each do |coupon|
+        coupon.is_active = false
+        coupon.save
+      end
+    end
   end
   
 end

@@ -14,7 +14,10 @@
   <% if @coupon.empty? %>
     <%= "まだ獲得されていません" %>
   <% else %>
-    <%= @coupon.count %>枚
+    計<%= @coupon.count %>枚
+    <% 1.upto(@coupon.count) do %>
+      <%= image_tag 'coupon.png', style: "width: 130px;" %>
+    <% end %>
   <% end %>
 <p>予約状況</p>
 <% if @reservations.empty? %>

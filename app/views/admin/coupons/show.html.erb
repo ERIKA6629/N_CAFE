@@ -1,0 +1,20 @@
+<%= @customer.last_name_kana + " " + @customer.first_name_kana + "様クーポン一覧" %>
+
+<table>
+  <thead>
+    <th>クーポンID</th>
+    <th>付与日時</th>
+    <th>更新日時</th>
+    <th>ステータス</th>
+  </thead>
+  <tbody>
+    <% @coupons.each do |coupon| %>
+      <tr>
+        <td><%= coupon.id %></td>
+        <td><%= l coupon.created_at, format: :long %></td>
+        <td><%= l coupon.updated_at, format: :long %></td>
+        <td><%= coupon.is_active ? '有効' : '使用済み' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
