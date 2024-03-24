@@ -1,0 +1,16 @@
+<h2>メニュー一覧</h2>
+<%= link_to "新規登録", new_admin_menu_path %>
+<%= link_to "ジャンル管理", admin_genres_path %>
+
+<% @menus.each do |menu| %>
+  <p>ジャンル</p>
+  <%= menu.genre.name %>
+  <p>メニューID</p>
+  <%= menu.id %>
+  <p>メニュー名</p>
+  <%= menu.name %>
+  <p>税抜価格</p>
+  <%= menu.price %>
+  <p>ステータス</p>
+  <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
+<% end %>

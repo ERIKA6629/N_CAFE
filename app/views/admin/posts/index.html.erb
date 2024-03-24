@@ -2,7 +2,7 @@
 
 <% @index_posts.each do |index_post| %>
   <%= link_to admin_post_path(index_post.id) do %>
-    <%= image_tag index_post.image, size: "200x200" %>
+    <%= image_tag index_post.image.variant(resize: "200x200").processed %>
   <% end %><br>
   <%= index_post.title %><br>
   <%= l index_post.created_at, format: :long %><br>

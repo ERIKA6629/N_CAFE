@@ -56,7 +56,7 @@
 
 <h2>最新情報</h2>
 <% @latest_posts.each do |latest_post| %>
-  <%= image_tag latest_post.image, style: "width: 200px;" %><br>
+  <%= image_tag latest_post.image.variant(resize: "200x200").processed %><br>
   <%= safe_join(latest_post.content.split("\n"),tag(:br)) %><br>
   <%= l latest_post.created_at, format: :long %><br>
 <% end %>

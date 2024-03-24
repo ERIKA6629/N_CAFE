@@ -1,5 +1,5 @@
 <h2>投稿詳細</h2>
-<%= image_tag @show_post.image, size: "200x200" %><br>
+<%= image_tag @show_post.image.variant(resize: "200x200").processed %><br>
 <%= @show_post.title %><br>
 <%= safe_join(@show_post.content.split("\n"),tag(:br)) %><br>
 <%= l @show_post.created_at, format: :long %><br>

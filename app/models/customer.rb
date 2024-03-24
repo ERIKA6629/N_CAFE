@@ -20,6 +20,7 @@ class Customer < ApplicationRecord
   validates :telephone_number, presence: true
   
   GUEST_USER_EMAIL = "guest@example.com"
+  ADMIN_EMAIL = "n_cafe@example.com"
   
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |customer|
@@ -34,6 +35,10 @@ class Customer < ApplicationRecord
   
   def guest_user?
     email == GUEST_USER_EMAIL
+  end
+  
+  def admin_user?
+    email == ADMIN_EMAIL
   end
   
   def check_customer_is_active

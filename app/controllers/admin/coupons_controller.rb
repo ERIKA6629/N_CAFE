@@ -1,4 +1,5 @@
 class Admin::CouponsController < ApplicationController
+  before_action :authenticate_admin!
   
   def show
     @customer = Customer.find(params[:id])

@@ -31,13 +31,14 @@
   <%= f.hidden_field :customer_id, value: @customer.id %>
   <%= f.submit 'ポイント付与' %>
 <% end %>
+
 <h2>クーポン</h2>
 <p>総獲得数</p><%= @coupons.count %>枚
 <% if @coupons.count > 0 %>
   直近獲得日:<%= l @latest_coupon.created_at, format: :long %>
+  <%= form_with model: @coupons, url: admin_coupon_path, method: :patch do |f| %>
+    <%#= f.hidden_field :customer_id, value: @customer.id %>
+    <%= f.submit 'クーポン利用' %>
+  <% end %>
+  <%= link_to "クーポン一覧", admin_coupon_path(@customer.id) %>
 <% end %>
-<%= form_with model: @coupons, url: admin_coupon_path, method: :patch do |f| %>
-  <%#= f.hidden_field :customer_id, value: @customer.id %>
-  <%= f.submit 'クーポン利用' %>
-<% end %>
-<%= link_to "クーポン一覧", admin_coupon_path(@customer.id) %>
