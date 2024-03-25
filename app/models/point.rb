@@ -11,7 +11,7 @@ class Point < ApplicationRecord
     customer = self.customer
     points = customer.points
     if points.size >= 10
-      coupon =customer.coupons.create
+      customer.coupons.create
       points.destroy_all
     end
   end

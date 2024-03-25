@@ -5,10 +5,9 @@
 <% @menus.each do |menu| %>
   <p>ジャンル</p>
   <%= menu.genre.name %>
-  <p>メニューID</p>
-  <%= menu.id %>
+
   <p>メニュー名</p>
-  <%= menu.name %>
+  <%= link_to menu.name, admin_menu_path(menu.id) %>
   <p>税抜価格</p>
   <%= menu.price %>
   <p>ステータス</p>

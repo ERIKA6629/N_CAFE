@@ -8,5 +8,5 @@
 <h2>ジャンル一覧</h2>
   <% @genres.each do |genre| %>
     <%= genre.name %>
-    <%= link_to "編集", edit_admin_genre_path(genre.id) %>
+    <%= link_to "編集", edit_admin_genre_path(genre.id) %><br>
   <% end %>

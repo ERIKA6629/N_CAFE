@@ -7,9 +7,8 @@
   </ul>
 <% end %>
 
-<h2>メニュー新規登録</h2>
-
-  <%= form_with model: @menu, url: admin_menus_path, method: :post do |f| %>
+<h2>メニュー編集</h2>
+  <%= form_with model: @menu, url: admin_menu_path, method: :patch do |f| %>
     <p>メニュー画像</p>
     <%= f.file_field :image, accept: "image/*" %>
     <p>ジャンル</p>
@@ -20,5 +19,5 @@
     <%= f.text_area :introduction %>
     <p>税抜価格</p>
     <%= f.text_field :price %>円
-    <%= f.submit '新規追加' %>
+    <%= f.submit '編集' %>
   <% end %>
