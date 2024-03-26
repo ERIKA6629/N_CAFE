@@ -1,0 +1,14 @@
+<h2>メニュー</h2>表示は税込価格です
+
+<% @genres.each do |genre| %> 
+  <%= genre.name %>
+  <%= image_tag genre.image.variant(resize: "300x300").processed %>
+  <% genre.menus.each do |menu| %>
+    <% if menu.is_sold_out == false %>
+      <p>メニュー名</p>
+      <%= link_to menu.name, menu_path(menu.id) %>
+      <p>税抜価格</p>
+      <%= menu.include_tax %>
+    <% end %>
+  <% end %>
+<% end %>

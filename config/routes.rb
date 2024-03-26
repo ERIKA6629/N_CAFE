@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get '/unsubscribe' => 'customers#unsubscribe'
     patch '/withdraw' => 'customers#withdraw'
     resources :reservations, except: [:show]
+    resources :menus, only: [:index, :show]
   end
   
   namespace :admin do

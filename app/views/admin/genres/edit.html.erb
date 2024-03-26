@@ -2,5 +2,7 @@
   <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
     <p>ジャンル名</p>
     <%= f.text_field :name %>
+    <p>画像</p>
+    <%= f.file_field :image, accept: "image/*" %>
     <%= f.submit '編集' %>
   <% end %>

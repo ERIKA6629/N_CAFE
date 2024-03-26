@@ -1,4 +1,5 @@
 class Admin::GenresController < ApplicationController
+  before_action :authenticate_admin!
   
   def index
     @genres = Genre.all
@@ -24,6 +25,6 @@ class Admin::GenresController < ApplicationController
   private
   
   def genre_params
-    params.require(:genre).permit(:name)
+    params.require(:genre).permit(:name, :image)
   end
 end
