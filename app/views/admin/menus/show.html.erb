@@ -2,7 +2,7 @@
 メニューID<%= @menu.id %><br>
 ジャンル<%= @menu.genre.name %><br>
 メニュー名<%= @menu.name %><br>
-メニュー説明<%= @menu.introduction %><br>
+メニュー説明<%= safe_join(@menu.introduction.split("\n"),tag(:br)) %><br>
 税込価格<%= @menu.include_tax %>円<br>
 税抜価格<%= @menu.price %>円<br>
 ステータス<%= @menu.is_sold_out ? '販売停止中' : '販売中' %><br>

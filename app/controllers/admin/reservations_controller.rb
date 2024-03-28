@@ -27,7 +27,7 @@ class Admin::ReservationsController < ApplicationController
         @reservation.reservation_time = reservation_time
         @reservation.number_of_people = @reservation.seat.limit_number
         @reservation.comment = "一括予約"
-        @reservation.save!
+        @reservation.save
       end
       redirect_to admin_path(display_date: @reservation.start_time)
     else

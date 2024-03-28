@@ -1,4 +1,4 @@
 <%= image_tag @menu.image.variant(resize: "200x200").processed %><br>
 メニュー名<%= @menu.name %><br>
-メニュー説明<%= @menu.introduction %><br>
+メニュー説明<%= safe_join(@menu.introduction.split("\n"),tag(:br)) %><br>
 税込価格<%= @menu.include_tax %>円<br>
