@@ -9,75 +9,105 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-            
-      <% if admin_signed_in? %>
-        <% if content_for?(:admin_path_with_date) %>
-          <%= yield(:admin_path_with_date) %>
-        <% else %>
-          <%= link_to admin_path do %>
-            <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+  <body class="d-flex flex-column">
+    <header class="border-bottom border-dark">
+      <nav class="navbar">
+        <div class="container">
+          <% if admin_signed_in? %>
+            <% if content_for?(:admin_path_with_date) %>
+              <%= yield(:admin_path_with_date) %>
+            <% else %>
+              <div class="navbar-brand">
+                <%= link_to admin_path do %>
+                  <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+                <% end %>
+              </div>
+            <% end %>
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item">
+                <%= link_to "メニュー", admin_menus_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "記事投稿", new_admin_post_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_customers_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-dark' %>
+              </li> 
+            </ul>
+          <% elsif customer_signed_in? %>
+            <div class="navbar-brand">
+              <%= link_to cafe_information_path do %>
+                <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+              <% end %>
+            </div>
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item">
+                <%= link_to "アクセス", access_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "メニュー", menus_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", my_page_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'text-dark' %>
+              </li>
+          <% else %>
+            <div class="navbar-brand">
+              <%= link_to public_top_path do %>
+                <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+              <% end %>
+            </div>
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item px-3">
+                <%= link_to "アクセス", access_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item px-3">
+                <%= link_to "メニュー", menus_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item px-3">
+                <%= link_to "ログイン", new_customer_session_path, class: 'text-dark' %>
+              </li>
+              <li class="nav-item px-3">
+                <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'text-dark' %>
+              </li>
+            </ul>
           <% end %>
+        </div>
+      </nav>
+      <div class="text-center">
+        <% if flash.now[:notice] %>
+          <%= notice %>
         <% end %>
-        <li>
-          <%= link_to "メニュー", admin_menus_path %>
-        </li>
-        <li>
-          <%= link_to "記事投稿", new_admin_post_path %>
-        </li>
-        <li>
-          <%= link_to "会員一覧", admin_customers_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-      <% elsif customer_signed_in? %>
-        <%= link_to cafe_information_path do %>
-          <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
-        <% end %>
-        <li>
-          <%= link_to "アクセス", access_path %>
-        </li>
-         <li>
-          <%= link_to "メニュー", menus_path %>
-        </li>
-        <li>
-          <%= link_to "マイページ", my_page_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <%= link_to public_top_path do %>
-          <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
-        <% end %>
-        <li>
-          <%= link_to "アクセス", access_path %>
-        </li>
-         <li>
-          <%= link_to "メニュー", menus_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_customer_session_path %>
-        </li>
-        <li>
-          <%= link_to "ゲストログイン", guest_sign_in_path, method: :post %>
-        </li>
-      <% end %>
+      </div>
     </header>
     
-    <div>
-      <% if flash.now[:notice] %>
-        <%= notice %>
-      <% end %>
-    </div>
-    
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   
     <footer class="text-light" style="background-color: midnightblue">
-      <p>N CAFE ・営業時間 10:00〜18:00 ・定休日 木曜 since 2020</p>
-      <div>Logo generated by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo designer</a></div>
+      <div class="container">
+        <div class="row pt-4">
+          <div class="col-3 h3 text-warning text-left">
+            N CAFE
+          </div>
+          <div class="col-6 h3">
+            <p>・営業時間 10:00〜18:00</p> 
+            <p>・定休日 木曜</p>
+          </div>
+          <div class="col-3 h3 d-flex align-items-end justify-content-end">
+            since 2020
+          </div>
+          <div class="row ml-auto py-3">
+            <div>Logo generated by <a href="https://www.designevo.com/" title="Free Online Logo Maker" class="text-light">DesignEvo free logo designer</a></div>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
