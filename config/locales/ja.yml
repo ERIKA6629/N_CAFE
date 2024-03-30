@@ -5,6 +5,12 @@ ja:
         image: 画像
         title: タイトル
         content: 本文
+      menu:
+        image: メニュー画像
+        genre_id: ジャンル
+        name: メニュー名
+        introduction: メニュー説明
+        price: 税抜価格
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
