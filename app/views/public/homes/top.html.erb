@@ -1,3 +1,7 @@
+<div class="bg-danger text-center text-white">
+  N CAFEは架空の店舗です。閲覧できる情報は存在しません。
+</div>
+
 <div class="text-center h4 mt-5">
   <p>ようこそ N CAFEへ</p>
   <p>予定の合間にちょこっと利用していただけるよう</p>
@@ -10,7 +14,7 @@
   <p>ちょうど良いCAFEを目指しています。</p>
 </div>
 <div class="d-flex justify-content-center h4 mt-4 mb-4">
-  <%= link_to "会員登録", new_customer_registration_path, class: 'text-dark' %>
-  <%= link_to "ログイン", new_customer_session_path, class: 'text-dark' %>
-  <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'text-dark' %>
+  <%= link_to "会員登録", new_customer_registration_path, class: 'text-dark btn btn-outline-success mr-3' %>
+  <%= link_to "ログイン", new_customer_session_path, class: 'text-dark btn btn-outline-primary mr-3' %>
+  <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'text-dark btn btn-outline-info' %>
 </div>

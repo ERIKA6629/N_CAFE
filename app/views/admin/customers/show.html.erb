@@ -23,11 +23,11 @@
 
 <h2>ポイント</h2>
 総獲得数：
-<%= @point.count %>Pt
-<% if @point.count > 0 %>
+<%= @points.count %>Pt
+<% if @points.count > 0 %>
   直近獲得日:<%= l @latest_point.created_at, format: :long %>
 <% end %>
-<%= form_with model: Point.new, url: admin_points_path, method: :post do |f| %>
+<%= form_with model: @point, url: admin_points_path do |f| %>
   <%= f.hidden_field :customer_id, value: @customer.id %>
   <%= f.submit 'ポイント付与' %>
 <% end %>
@@ -36,9 +36,8 @@
 <p>総獲得数</p><%= @coupons.count %>枚
 <% if @coupons.count > 0 %>
   直近獲得日:<%= l @latest_coupon.created_at, format: :long %>
-  <%= form_with model: @coupons, url: admin_coupon_path, method: :patch do |f| %>
-    <%#= f.hidden_field :customer_id, value: @customer.id %>
+  <%= form_with model: @coupon, url: admin_coupon_path do |f| %>
     <%= f.submit 'クーポン利用' %>
   <% end %>
-  <%= link_to "クーポン一覧", admin_coupon_path(@customer.id) %>
+  <%= link_to "クーポン一覧", admin_customer_coupons_path(@customer) %>
 <% end %>

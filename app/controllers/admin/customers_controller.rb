@@ -7,9 +7,11 @@ class Admin::CustomersController < ApplicationController
   
   def show
     @customer = Customer.find(params[:id])
-    @point = Point.where(customer_id: params[:id])
-    @latest_point = @point.last
-    @coupons = Coupon.where(customer_id: params[:id], is_active: true)
+    @points = Point.where(customer_id: params[:id])
+    @point = Point.new
+    @latest_point = @points.last
+    @coupons = @customer.coupons.where(is_active: true).order(created_at: :asc)
+    @coupon = @coupons.first
     @latest_coupon = @coupons.last
   end
   

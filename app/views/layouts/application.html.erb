@@ -19,7 +19,7 @@
             <% else %>
               <div class="navbar-brand">
                 <%= link_to admin_path do %>
-                  <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+                  <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
                 <% end %>
               </div>
             <% end %>
@@ -40,7 +40,7 @@
           <% elsif customer_signed_in? %>
             <div class="navbar-brand">
               <%= link_to cafe_information_path do %>
-                <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+                <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
               <% end %>
             </div>
             <ul class="navbar-nav flex-row">
@@ -59,7 +59,7 @@
           <% else %>
             <div class="navbar-brand">
               <%= link_to public_top_path do %>
-                <%= image_tag 'n_cafe_logo.jpg', size: "150x150" %>
+                <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
               <% end %>
             </div>
             <ul class="navbar-nav flex-row">
@@ -86,21 +86,21 @@
       </div>
     </header>
     
-    <main>
+    <main class="container">
       <%= yield %>
     </main>
   
     <footer class="text-light" style="background-color: midnightblue">
       <div class="container">
-        <div class="row pt-4">
-          <div class="col-3 h3 text-warning text-left">
+        <div class="row pt-3">
+          <div class="col-3 h5 text-warning text-left">
             N CAFE
           </div>
-          <div class="col-6 h3">
+          <div class="col-6 h5">
             <p>・営業時間 10:00〜18:00</p> 
             <p>・定休日 木曜</p>
           </div>
-          <div class="col-3 h3 d-flex align-items-end justify-content-end">
+          <div class="col-3 h5 d-flex align-items-end justify-content-end">
             since 2020
           </div>
           <div class="row ml-auto py-3">

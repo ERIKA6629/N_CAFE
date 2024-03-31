@@ -1,27 +1,31 @@
-<h2>メニュー一覧</h2>
-<%= link_to "新規登録", new_admin_menu_path %>
-<%= link_to "ジャンル管理", admin_genres_path %><br>
-
-<% @genres.each do |genre| %> 
-  <%= genre.name %>
-  <table>
-    <thead>
-      <th>メニュー名</th>
-      <th>税抜価格</th>
-      <th>ステータス</th>
-    </thead>
-    <% genre.menus.each do |menu| %>
-      <tbody>
-        <td>
-          <%= link_to menu.name, admin_menu_path(menu.id) %>
-        </td>
-        <td>
-          <%= menu.price %>
-        </td>
-        <td>
-          <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
-        </td>
-      </tbody>
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <h2>メニュー一覧</h2>
+    <%= link_to "新規登録", new_admin_menu_path %>
+    <%= link_to "ジャンル管理", admin_genres_path %><br>
+    
+    <% @genres.each do |genre| %> 
+      <%= genre.name %>
+      <table>
+        <thead>
+          <th>メニュー名</th>
+          <th>税抜価格</th>
+          <th>ステータス</th>
+        </thead>
+        <% genre.menus.each do |menu| %>
+          <tbody>
+            <td>
+              <%= link_to menu.name, admin_menu_path(menu.id) %>
+            </td>
+            <td>
+              <%= menu.price %>
+            </td>
+            <td>
+              <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
+            </td>
+          </tbody>
+        <% end %>
+      </table>
     <% end %>
-  </table>
-<% end %>
+  </div>
+</div>

@@ -32,7 +32,16 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'reservations#index'
     get '/search' => 'customers#search'
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      resources :coupons, only: [:index]
+      # resource :followings, only: [:create, :destroy]
+      # member do
+      #   get 'coupons'
+      # end
+      # collection do
+      #   get 'ranking'
+      # end
+    end
     post '/create_all' => 'reservations#create_all'
     resources :reservations, except: [:index]
     resources :posts
