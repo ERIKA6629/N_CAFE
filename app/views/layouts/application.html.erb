@@ -24,16 +24,16 @@
               </div>
             <% end %>
             <ul class="navbar-nav flex-row">
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "メニュー", admin_menus_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "記事投稿", new_admin_post_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "会員一覧", admin_customers_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-dark' %>
               </li> 
             </ul>
@@ -44,16 +44,16 @@
               <% end %>
             </div>
             <ul class="navbar-nav flex-row">
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "アクセス", access_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "メニュー", menus_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "マイページ", my_page_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item h5">
                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'text-dark' %>
               </li>
           <% else %>
@@ -63,16 +63,16 @@
               <% end %>
             </div>
             <ul class="navbar-nav flex-row">
-              <li class="nav-item px-3">
+              <li class="nav-item px-3 h5">
                 <%= link_to "アクセス", access_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item px-3">
+              <li class="nav-item px-3 h5">
                 <%= link_to "メニュー", menus_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item px-3">
+              <li class="nav-item px-3 h5">
                 <%= link_to "ログイン", new_customer_session_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item px-3">
+              <li class="nav-item px-3 h5">
                 <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'text-dark' %>
               </li>
             </ul>

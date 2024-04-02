@@ -1,4 +1,19 @@
-<%= image_tag @menu.image.variant(resize: "200x200").processed %><br>
-メニュー名<%= @menu.name %><br>
-メニュー説明<%= safe_join(@menu.introduction.split("\n"),tag(:br)) %><br>
-税込価格<%= @menu.include_tax %>円<br>
+<div class="row mt-3 mb-3">
+  <div class="col-md-5 col-lg-5">
+    <div class="d-flex align-items-center"><%= image_tag @menu.image.variant(resize: "400x400").processed, class: "d-flex img-fluid" %></div>
+  </div>
+  <div class="col-md-7 col-lg-7">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 h5 text-center text-md-left">メニュー名</div>
+      <div class="col-md-8 col-lg-8 h5 text-center text-md-left"><%= @menu.name %></div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4 col-lg-4 h5 text-center text-md-left">メニュー説明</div>
+      <div class="col-md-8 col-lg-8 h5 text-center text-md-left"><%= safe_join(@menu.introduction.split("\n"),tag(:br)) %></div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4 col-lg-4 h5 text-center text-md-left">税込価格</div>
+      <div class="col-md-8 col-lg-8 h5 text-center text-md-left"><%= @menu.include_tax %>円</div>
+    </div>
+  </div>
+</div>

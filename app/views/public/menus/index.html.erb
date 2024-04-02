@@ -1,23 +1,23 @@
 <div class="row my-3">
-  <div class="col-lg-8 offset-lg-2">
+  <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2">
     <div class="d-flex justify-content-between">
         <div class="h2">メニュー</div>
         <div class=" d-flex align-items-end">表示は税込価格です</div>
     </div>
       <% @genres.each do |genre| %> 
-        <div class="row mt-3">
+        <div class="row mt-3 h5">
           <div><%= genre.name %></div>
         </div>
         <div class="row">
-          <div class="col-6">
-            <div class="d-flex img-fluid"><%= image_tag genre.image.variant(resize: "250x250").processed %></div>
+          <div class="col-md-5 col-lg-6">
+            <div class="d-flex align-items-center"><%= image_tag genre.image.variant(resize: "250x250").processed, class: "d-flex img-fluid" %></div>
           </div>
-          <div class="col-6">
+          <div class="col-md-7 col-lg-6">
             <% genre.menus.each do |menu| %>
               <% if menu.is_sold_out == false %>
-                <div class="row d-flex flex-row">
-                  <div class="col-8"><%= link_to menu.name, menu_path(menu.id), class: "text-dark" %></div>
-                  <div class="col-4"><%= menu.include_tax %></div>
+                <div class="row">
+                  <div class="col-8 col-md-8 col-lg-8 h5"><%= link_to menu.name, menu_path(menu.id), class: "text-dark" %></div>
+                  <div class="col-4 col-md-4 col-lg-4 h5"><%= menu.include_tax %>円</div>
                 </div>
               <% end %>
             <% end %>
