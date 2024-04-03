@@ -1,62 +1,81 @@
-<h2>座席状況</h2>
-
-<%= l @display_time, format: :long %>時点
-<% if Date.today.wday == @non_business_day %>
-  <p>本日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
-<% elsif @reservation_time %>
-  <p>営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。</p>
-<% else %>
-  <% if @display_time < @open_time %>
-    <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
-  <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
-    <p>現在は営業時間外です。また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
-  <% elsif @display_time >= @close_time %>
-    <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
-  <% else %>
-    ohhhh!
-  <% end %>
-<% end %>
-
-<p>座席番号をクリックすると、各座席の予約表を表示することができます。</p>
-
-<table>
-  <thead>
-    <% @seats.each do |seat| %>
-      <th>
-        <%= link_to reservations_path(seat_id: seat.id) do %>
-          <%= seat.name %>
-        <% end %>
-      </th>
-    <% end %>
-  </thead>
-  <tbody>
-    <tr>
-    <% @seats.each do |seat| %>
-      
-      <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
-      <% if Date.today.wday == @non_business_day %>
-        <td><%= tomorrow_seat_result(seat) %></td>
-      <% elsif @reservation_time %>
-        <td><%= now_seat_result(seat, @start_at, @end_at) %></td>
+<div class="row ax-auto mt-3">
+  <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+    <h2>座席状況</h2>
+    
+    <p class="h5"><%= l @display_time, format: :long %>時点</p>
+    <% if Date.today.wday == @non_business_day %>
+      <p class="h5">本日は定休日です。表示は金曜日10:00~10:30の座席状況です</p>
+    <% elsif @reservation_time %>
+      <p class="h5">営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。</p>
+    <% else %>
+      <% if @display_time < @open_time %>
+        <p class="h5">現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
+      <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
+        <p class="h5">現在は営業時間外です。</p>
+        <p class="h5">また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
+      <% elsif @display_time >= @close_time %>
+        <p class="h5">現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
       <% else %>
-        <% if @display_time < @open_time %>
-          <td><%= next_seat_result(seat) %></td>
-        <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
-          <td><%= day_after_tomorrow_seat_result(seat) %></td>
-        <% elsif @display_time >= @close_time %>
-          <td><%= tomorrow_seat_result(seat) %></td>
-        <% end %>
+        ohhhh!
       <% end %>
     <% end %>
-    </tr>
-  </tbody>
-</table>
+    
+    <p class="h5">座席番号をクリックすると、各座席の予約表を表示することができます。</p>
+    
+    <table class="table table-bordered">
+      <thead>
+        <% @seats.each do |seat| %>
+          <th class="text-center table-active">
+            <%= link_to reservations_path(seat_id: seat.id) do %>
+              <%= seat.name %>
+            <% end %>
+          </th>
+        <% end %>
+      </thead>
+      <tbody>
+        <tr>
+        <% @seats.each do |seat| %>
+          
+          <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
+          <% if Date.today.wday == @non_business_day %>
+            <td class="text-center text-dark"><%= tomorrow_seat_result(seat) %></td>
+          <% elsif @reservation_time %>
+            <td class="text-cente text-dark"><%= now_seat_result(seat, @start_at, @end_at) %></td>
+          <% else %>
+            <% if @display_time < @open_time %>
+              <td class="text-center text-dark"><%= next_seat_result(seat) %></td>
+            <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
+              <td class="text-center text-dark"><%= day_after_tomorrow_seat_result(seat) %></td>
+            <% elsif @display_time >= @close_time %>
+              <td class="text-center"><%= tomorrow_seat_result(seat) %></td>
+            <% end %>
+          <% end %>
+        <% end %>
+        </tr>
+      </tbody>
+    </table>
+    
+    <%= image_tag 'CAFE_seat.jpg', class: "d-flex img-fluid" %>
+  </div>
+</div>
 
-<%= image_tag 'CAFE_seat.jpg', style: "width: 40%;" %>
-
-<h2>最新情報</h2>
-<% @latest_posts.each do |latest_post| %>
-  <%= image_tag latest_post.image.variant(resize: "200x200").processed %><br>
-  <%= safe_join(latest_post.content.split("\n"),tag(:br)) %><br>
-  <%= l latest_post.created_at, format: :long %><br>
-<% end %>
+<div class="row mt-3 mb-3">
+  <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+    <h2>最新情報</h2>
+    <% @latest_posts.each do |latest_post| %>
+      <div class="card mx-auto mt-3" style="max-width: 540px;">
+        <div class="row no-gutters m-3">
+          <div class="col-md-4">
+            <div><%= image_tag latest_post.image.variant(resize: "200x200").processed, class: "d-flex img-fluid" %></div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <p class="card-text"><%= safe_join(latest_post.content.split("\n"),tag(:br)) %></p>
+              <p class="card-text"><%= l latest_post.created_at, format: :long %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

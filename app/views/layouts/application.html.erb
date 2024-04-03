@@ -11,58 +11,79 @@
 
   <body class="d-flex flex-column">
     <header class="border-bottom border-dark">
-      <nav class="navbar">
-        <div class="container">
-          <% if admin_signed_in? %>
-            <% if content_for?(:admin_path_with_date) %>
-              <%= yield(:admin_path_with_date) %>
-            <% else %>
-              <div class="navbar-brand">
-                <%= link_to admin_path do %>
-                  <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
-                <% end %>
-              </div>
-            <% end %>
-            <ul class="navbar-nav flex-row">
-              <li class="nav-item h5">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <% if admin_signed_in? %>
+          <% if content_for?(:admin_path_with_date) %>
+            <%= yield(:admin_path_with_date) %>
+          <% else %>
+            <div class="navbar-brand">
+              <%= link_to admin_path do %>
+                <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
+              <% end %>
+            </div>
+          <% end %>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item px-3 h5">
                 <%= link_to "メニュー", admin_menus_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "記事投稿", new_admin_post_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "会員一覧", admin_customers_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-dark' %>
               </li> 
             </ul>
-          <% elsif customer_signed_in? %>
-            <div class="navbar-brand">
-              <%= link_to cafe_information_path do %>
-                <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
-              <% end %>
-            </div>
-            <ul class="navbar-nav flex-row">
-              <li class="nav-item h5">
+          </div>
+        <% elsif customer_signed_in? %>
+          <div class="navbar-brand">
+            <%= link_to cafe_information_path do %>
+              <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
+            <% end %>
+          </div>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item px-3 h5">
                 <%= link_to "アクセス", access_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "メニュー", menus_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "マイページ", my_page_path, class: 'text-dark' %>
               </li>
-              <li class="nav-item h5">
+              <li class="nav-item px-3 h5">
                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'text-dark' %>
               </li>
-          <% else %>
-            <div class="navbar-brand">
-              <%= link_to public_top_path do %>
-                <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
-              <% end %>
-            </div>
-            <ul class="navbar-nav flex-row">
+            </ul>
+          </div>
+          
+        <% else %>
+          <div class="navbar-brand">
+            <%= link_to public_top_path do %>
+              <%= image_tag 'n_cafe_logo.jpg', size: "200x200" %>
+            <% end %>
+          </div>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
               <li class="nav-item px-3 h5">
                 <%= link_to "アクセス", access_path, class: 'text-dark' %>
               </li>
@@ -76,8 +97,8 @@
                 <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'text-dark' %>
               </li>
             </ul>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </nav>
       <div class="text-center">
         <% if flash.now[:notice] %>
@@ -93,14 +114,14 @@
     <footer class="text-light" style="background-color: midnightblue">
       <div class="container">
         <div class="row pt-3">
-          <div class="col-3 h5 text-warning text-left">
+          <div class="col-md-3 col-lg-3 h5 text-warning text-left">
             N CAFE
           </div>
-          <div class="col-6 h5">
+          <div class="col-md-6 col-lg-6 h5">
             <p>・営業時間 10:00〜18:00</p> 
             <p>・定休日 木曜</p>
           </div>
-          <div class="col-3 h5 d-flex align-items-end justify-content-end">
+          <div class="col-md-3 col-lg-3 h5 d-flex align-items-end justify-content-end">
             since 2020
           </div>
           <div class="row ml-auto py-3">
