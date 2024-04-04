@@ -1,14 +1,26 @@
-<%= @reservation.seat.name %>の座席予約
+<div class="row mx-auto my-3">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="h2"><%= @reservation.seat.name %>の座席予約</div>
+    
+    <%= form_with model: @reservation, url: reservations_path do |f| %>
+      <div class="h5 mt-3">利用可能人数</div>
+      <div class="border border-secondary rounded bg-light p-2 h5"><%= @reservation.seat.limit_number %>名まで</div>
+      <div class="h5 mt-3">日時</div>
+      <div class="border border-secondary rounded bg-light p-2 h5"><%= l @reservation.start_time, format: :long %></div>
+      <div class="border border-secondary rounded bg-light p-2 mt-1 h5"><%= @reservation.reservation_time.start_at + '〜' + @reservation.reservation_time.end_at %></div>
+      <div class="h5 mt-3">予約者</div>
+      <div class="border border-secondary rounded bg-light p-2 h5"><%= current_customer.last_name_kana %></div>
 
-<%= form_with model: @reservation, url: reservations_path do |f| %>
-  座席<%= @reservation.seat.limit_number %>名まで利用可<br>
-  <%= l @reservation.start_time, format: :long %><br>
-  <%= @reservation.reservation_time.start_at + '〜' + @reservation.reservation_time.end_at %><br>
-  予約者<%= current_customer.last_name_kana %><br>
-  予約人数<%= f.select :number_of_people, *[1..@reservation.seat.limit_number] %>人<br>
-  コメント<%= f.text_area :comment, placeholder: "ゲストとして予約する場合は、コメント欄にお名前（カタカナ）を入力ください。" %><br>
-  <%= f.hidden_field :seat_id, value: @reservation.seat.id %>
-  <%= f.hidden_field :reservation_time_id, value: @reservation.reservation_time.id %>
-  <%= f.hidden_field :start_time, value: @reservation.start_time %>
-  <%= f.submit '予約する' %>
-<% end %>
+      <div class="h5 mt-3">予約人数</div>
+      <div><%= f.select :number_of_people, *[1..@reservation.seat.limit_number], { include_blank: "---select---" }, { class: "form-control border-secondary" } %></div>
+
+      <div class="h5 mt-3">コメント</div>
+      <div><%= f.text_area :comment, placeholder: "ゲストとして予約する場合は、コメント欄にお名前（カタカナ）を入力ください。", class: "form-control border-secondary", rows: "5" %></div>
+
+      <%= f.hidden_field :seat_id, value: @reservation.seat.id %>
+      <%= f.hidden_field :reservation_time_id, value: @reservation.reservation_time.id %>
+      <%= f.hidden_field :start_time, value: @reservation.start_time %>
+      <%= f.submit '予約する', class: "btn btn-outline-primary btn-block mt-3" %>
+    <% end %>
+  </div>
+</div>

@@ -1,6 +1,12 @@
-<h2>予約一覧</h2>
-<%= @seat.name %>の座席予約
-<p>現在より先の予約を、1枠30分でお取りいただけます。必要な枠数分ご予約ください。</p>
-<%= week_calendar events: @reservations do |date, reservation| %>
-　<%= date.day %>
-<% end %>
+<div class="row mx-auto my-3">
+  <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+    <div class="h2">座席番号：<%= @seat.name %>　予約一覧</div>
+    <div class="mt-3 h5">現在より先の予約を、1枠30分でお取りいただけます。</div>
+    <div class="h5">必要な枠数分ご予約ください。</div>
+    <div class="mt-3">
+      <%= week_calendar events: @reservations do |date, reservation| %>
+      　<%= date.day %>
+      <% end %>
+    </div>
+  </div>
+</div>

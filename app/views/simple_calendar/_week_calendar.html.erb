@@ -1,6 +1,6 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <span class="calendar-title">
+    <span class="calendar-title h5">
       <%= start_date.strftime("%Y年%m月") %>
       <%#= t('simple_calendar.week', default: 'Week') %>
       <%#= calendar.week_number %>
@@ -9,31 +9,29 @@
       <%# end %>
     </span>
 
-    <nav>
+    <nav class="d-flex justify-content-between mt-3">
       <%#= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-      <%= link_to t('simple_calendar.today', default: '今週'), calendar.url_for_today_view %>
-      <%= link_to t('simple_calendar.next', default: '次週'), calendar.url_for_next_view %>
+      <%= link_to t('simple_calendar.today', default: '今週'), calendar.url_for_today_view, class: "text-warning h5" %>
+      <%= link_to "座席選択に戻る", cafe_information_path, class: "text-dark h5" %>
+      <%= link_to t('simple_calendar.next', default: '次週'), calendar.url_for_next_view, class: "text-warning h5" %>
     </nav>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>時間</th>
+  <table class="table table-bordered">
+    <tbody>
+      <tr class="table-secondary text-center">
+        <td rowspan="2" class="text-center">予約枠</td>
         <% date_range.slice(0, 7).each do |day| %>
           <% if I18n.l(day, format: :month) > I18n.l(start_date, format: :month) %>
-            <th><%= '(' + day.strftime("%-m月") + ')' + t('date.abbr_day_names')[day.wday] %></th>
+            <td><%= '(' + day.strftime("%-m月") + ')' + t('date.abbr_day_names')[day.wday] %></td>
           <% else %>
-            <th><%= t('date.abbr_day_names')[day.wday] %></th>
+            <td><%= t('date.abbr_day_names')[day.wday] %></td>
           <% end %>
         <% end %>
       </tr>
-    </thead>
 
-    <tbody>
       <% date_range.each_slice(7) do |week| %>
-        <tr>
-          <td></td>
+        <tr class="table-secondary">
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
@@ -41,14 +39,14 @@
           <% end %>
         </tr>
         <% @reservation_times.each do |reservation_time| %>
-          <tr>
+          <tr class="text-center">
             <td><%= reservation_time.start_at + "〜" %></td>
             
             <% week.each do |day| %>
               <% reservation = @reservations.find_by(seat_id: @seat.id, reservation_time_id: reservation_time.id, start_time: day) %>
               <% if reservation_time.start_at == "10:00" %>
                 <% if day.wday == @non_business_day %>
-                  <td rowspan= "16"><%= '定休日' %></td>
+                  <td rowspan= "16" class="bg-warning"><%= '定休日' %></td>
                 <% elsif for_showing_reservations(@start_at_obj, day, reservation_time.start_at) %>
                   <td><%= ' ' %></td>
                 <% else %>
@@ -58,11 +56,11 @@
                         <%= f.hidden_field :seat_id, value: @seat.id %>
                         <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
                         <%= f.hidden_field :start_time, value: day %>
-                        <%= f.submit '◯' %>
+                        <%= f.submit '◯', class: "btn btn-outline-success" %>
                       <% end %>
                     </td>
                   <% else %>
-                    <td><%= '×' %></td>
+                    <td class="h3"><%= '×' %></td>
                   <% end %>
                 <% end %>
               <% else %>
@@ -71,14 +69,14 @@
                   <% if for_showing_reservations(@start_at_obj, day, reservation_time.start_at) %>
                     <td><%= ' ' %></td>
                   <% elsif reservation %>
-                    <td><%= '×' %></td>
+                    <td class="h3"><%= '×' %></td>
                   <% elsif reservation.nil? %>
                     <td>
                       <%= form_with model: @reservations, url: new_reservation_path, method: :get do |f| %>
                         <%= f.hidden_field :seat_id, value: @seat.id %>
                         <%= f.hidden_field :reservation_time_id, value: reservation_time.id %>
                         <%= f.hidden_field :start_time, value: day %>
-                        <%= f.submit '◯' %>
+                        <%= f.submit '◯', class: "btn btn-outline-success" %>
                       <% end %>
                     </td>
                   <% end %>

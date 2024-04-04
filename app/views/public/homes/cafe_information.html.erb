@@ -25,7 +25,7 @@
     <table class="table table-bordered">
       <thead>
         <% @seats.each do |seat| %>
-          <th class="text-center table-active">
+          <th class="text-center table-secondary">
             <%= link_to reservations_path(seat_id: seat.id) do %>
               <%= seat.name %>
             <% end %>
