@@ -1,66 +1,94 @@
-<h2>マイページ</h2>
-
-<p>ポイント</p>
-<p>1回ご来店につき1ポイントプレゼント！</p>
-<p>※お会計の際にマイページをご提示ください</p>
-<% if @point.empty? %>
-  <%= "0Pt" %>
-<% else %>
-  <%= @point.count %>Pt
-<% end %>
-
-<p>獲得クーポン</p>
-<p>次回お会計時にご利用可　※お会計の際にマイページをご提示ください</p>
-  <% if @coupon.empty? %>
-    <%= "まだ獲得されていません" %>
-  <% else %>
-    計<%= @coupon.count %>枚
-    <% 1.upto(@coupon.count) do %>
-      <%= image_tag 'coupon.png', style: "width: 130px;" %>
+<div class="row my-3">
+  <div class="col-md-12 col-lg-8 offset-lg-2">
+    <h2>マイページ</h2>
+    
+    <div class="bg-warning rounded p-1 mt-3">ポイント</div>
+    <p>1回ご来店につき1ポイントプレゼント！</p>
+    <p>※お会計の際にマイページをご提示ください</p>
+    <% if @point.empty? %>
+      <%= "0Pt" %>
+    <% else %>
+      <%= @point.count %>Pt
     <% end %>
-  <% end %>
-<p>予約状況</p>
-<% if @reservations.empty? %>
-  <p>予約はありません。</p>
-<% end %>
-<% @reservations.each do |reservation| %>
-  <% reservation_time = Time.zone.parse("#{reservation.start_time} #{reservation.reservation_time.start_at}") %>
-  <% if @start_at_obj <= reservation_time %>
-    <table>
-      <tr>
-        <td>
-          <%= l reservation.start_time, format: :long %>
-        </td>
-        <td>
-          <%= reservation.reservation_time.start_at + '〜' + reservation.reservation_time.end_at %>
-        </td>
-        <td>
-          <%= reservation.seat.name %>
-        </td>
-        <td>
-          <%= reservation.number_of_people %>名
-        </td>
-        <td>
-          <%= link_to "変更", edit_reservation_path(reservation.id) %>
-        </td>
-        <td>
-          <%= link_to 'キャンセル', reservation_path(reservation.id), method: :delete, "data-confirm" => "本当にキャンセルしますか？データは削除されます。" %>
-        </td>
-      </tr>
-    </table>
-  <% end %>
-<% end %>
 
-<p>登録内容</p>
-<p>会員ID</p>
-<%= @customer.id %>
-<p>氏名</p>
-<%= @customer.last_name + " " + @customer.first_name %>
-<p>フリガナ</p>
-<%= @customer.last_name_kana + " " + @customer.first_name_kana %>
-<p>電話番号</p>
-<%= @customer.telephone_number %>
-<p>メールアドレス</p>
-<%= @customer.email %><br>
-
-<%= link_to "編集", information_edit_path %>
+    <div class="bg-warning rounded p-1 mt-3">獲得クーポン</div>
+    <p>次回お会計時にご利用可　※お会計の際にマイページをご提示ください</p>
+    <% if @coupon.empty? %>
+      <%= "まだ獲得されていません" %>
+    <% else %>
+      <p>計<%= @coupon.count %>枚</p>
+      <% 1.upto(@coupon.count) do %>
+        <%= image_tag 'coupon.png', style: "width: 130px;" %>
+      <% end %>
+    <% end %>
+    
+    <div class="bg-warning rounded p-1 mt-3">予約状況</div>
+    <% if @reservations.empty? %>
+      <p>予約はありません。</p>
+    <% end %>
+    <% @reservations.each do |reservation| %>
+      <% reservation_time = Time.zone.parse("#{reservation.start_time} #{reservation.reservation_time.start_at}") %>
+      <% if @start_at_obj <= reservation_time %>
+        <div class="row pt-3 px-1">
+          <div class="col-md-4 col-lg-4 text-center">
+            <%= l reservation.start_time, format: :long %>
+          </div>
+          <div class="col-md-3 col-lg-3 text-center">
+            <%= reservation.reservation_time.start_at + '〜' + reservation.reservation_time.end_at %>
+          </div>
+          <div class="col-md-2 col-lg-2 d-flex justify-content-around">
+            <p><%= reservation.seat.name %></p>
+            <p><%= reservation.number_of_people %>名</p>
+          </div>
+          <div class="col-md-3 col-lg-3 d-flex flex-column">
+            <%= link_to "変更", edit_reservation_path(reservation.id), class: "text-dark btn btn-outline-primary btn-block" %>
+            <%= link_to 'キャンセル', reservation_path(reservation.id), method: :delete, "data-confirm" => "本当にキャンセルしますか？データは削除されます。", class: "btn btn-secondary btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <div class="bg-warning rounded p-1 mt-3">登録内容</div>
+      <div class="row p-1">
+        <div class="col-md-5 col-lg-4">
+          <siv>会員ID</siv>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="px-3"><%= @customer.id %></div>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-5 col-lg-4">
+          <div>氏名</div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="px-3"><%= @customer.last_name + " " + @customer.first_name %></div>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-5 col-lg-4">
+          <div>フリガナ</div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="px-3"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></div>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-5 col-lg-4">
+          <div>電話番号</div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="px-3"><%= @customer.telephone_number %></div>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-5 col-lg-4">
+          <div>メールアドレス</div>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="px-3"><%= @customer.email %></div>
+        </div>
+      </div>
+    <%= link_to "編集", information_edit_path, class: "text-dark btn btn-outline-primary btn-block" %>
+  </div>
+</div>
