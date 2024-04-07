@@ -20,6 +20,7 @@
       <%= f.hidden_field :seat_id, value: @reservation.seat.id %>
       <%= f.hidden_field :reservation_time_id, value: @reservation.reservation_time.id %>
       <%= f.hidden_field :start_time, value: @reservation.start_time %>
+      <%= hidden_field_tag :since_today, params[:since_today] %>
       <%= f.submit '予約する', class: "btn btn-outline-primary btn-block mt-3" %>
     <% end %>
   </div>

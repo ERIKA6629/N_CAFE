@@ -17,9 +17,11 @@
       <%= "まだ獲得されていません" %>
     <% else %>
       <p>計<%= @coupon.count %>枚</p>
-      <% 1.upto(@coupon.count) do %>
-        <%= image_tag 'coupon.png', style: "width: 130px;" %>
-      <% end %>
+      <div class="px-3">
+        <% 1.upto(@coupon.count) do %>
+          <%= image_tag 'coupon.png', style: "width: 120px;" %>
+        <% end %>
+      </div>
     <% end %>
     
     <div class="bg-warning rounded p-1 mt-3">予約状況</div>
@@ -41,7 +43,7 @@
             <p><%= reservation.number_of_people %>名</p>
           </div>
           <div class="col-md-3 col-lg-3 d-flex flex-column">
-            <%= link_to "変更", edit_reservation_path(reservation.id), class: "text-dark btn btn-outline-primary btn-block" %>
+            <%= link_to "変更", edit_reservation_path(reservation.id), class: "btn btn-outline-primary btn-block" %>
             <%= link_to 'キャンセル', reservation_path(reservation.id), method: :delete, "data-confirm" => "本当にキャンセルしますか？データは削除されます。", class: "btn btn-secondary btn-block" %>
           </div>
         </div>
@@ -49,46 +51,44 @@
     <% end %>
     
     <div class="bg-warning rounded p-1 mt-3">登録内容</div>
-      <div class="row p-1">
-        <div class="col-md-5 col-lg-4">
+      <div class="row row-cols-md-6 row-cols-lg-6 p-1">
+        
+        <div class="col-md-5 col-lg-4 mt-2">
           <siv>会員ID</siv>
         </div>
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8 mt-2">
           <div class="px-3"><%= @customer.id %></div>
         </div>
-      </div>
-      <div class="row p-1">
-        <div class="col-md-5 col-lg-4">
+        
+        <div class="col-md-5 col-lg-4 mt-2">
           <div>氏名</div>
         </div>
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8 mt-2">
           <div class="px-3"><%= @customer.last_name + " " + @customer.first_name %></div>
         </div>
-      </div>
-      <div class="row p-1">
-        <div class="col-md-5 col-lg-4">
+      
+        <div class="col-md-5 col-lg-4 mt-2">
           <div>フリガナ</div>
         </div>
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8 mt-2">
           <div class="px-3"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></div>
         </div>
-      </div>
-      <div class="row p-1">
-        <div class="col-md-5 col-lg-4">
+      
+        <div class="col-md-5 col-lg-4 mt-2">
           <div>電話番号</div>
         </div>
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8 mt-2">
           <div class="px-3"><%= @customer.telephone_number %></div>
         </div>
-      </div>
-      <div class="row p-1">
-        <div class="col-md-5 col-lg-4">
+      
+        <div class="col-md-5 col-lg-4 mt-2">
           <div>メールアドレス</div>
         </div>
-        <div class="col-md-7 col-lg-8">
+        <div class="col-md-7 col-lg-8 mt-2">
           <div class="px-3"><%= @customer.email %></div>
         </div>
-      </div>
-    <%= link_to "編集", information_edit_path, class: "text-dark btn btn-outline-primary btn-block" %>
+        
+       </div> 
+    <%= link_to "編集", information_edit_path, class: "btn btn-outline-primary btn-block mt-2" %>
   </div>
 </div>

@@ -22,38 +22,40 @@
     
     <p class="h5">座席番号をクリックすると、各座席の予約表を表示することができます。</p>
     
-    <table class="table table-bordered">
-      <thead>
-        <% @seats.each do |seat| %>
-          <th class="text-center table-secondary">
-            <%= link_to reservations_path(seat_id: seat.id) do %>
-              <%= seat.name %>
-            <% end %>
-          </th>
-        <% end %>
-      </thead>
-      <tbody>
-        <tr>
-        <% @seats.each do |seat| %>
-          
-          <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
-          <% if Date.today.wday == @non_business_day %>
-            <td class="text-center text-dark"><%= tomorrow_seat_result(seat) %></td>
-          <% elsif @reservation_time %>
-            <td class="text-cente text-dark"><%= now_seat_result(seat, @start_at, @end_at) %></td>
-          <% else %>
-            <% if @display_time < @open_time %>
-              <td class="text-center text-dark"><%= next_seat_result(seat) %></td>
-            <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
-              <td class="text-center text-dark"><%= day_after_tomorrow_seat_result(seat) %></td>
-            <% elsif @display_time >= @close_time %>
-              <td class="text-center"><%= tomorrow_seat_result(seat) %></td>
+    <div class="table-responsive-sm table-responsive-md table-responsive-lg">
+      <table class="table table-bordered">
+        <thead>
+          <% @seats.each do |seat| %>
+            <th class="px-0 text-center table-secondary">
+              <%= link_to reservations_path(seat_id: seat.id) do %>
+                <div class="text-dark"><%= seat.name %></div>
+              <% end %>
+            </th>
+          <% end %>
+        </thead>
+        <tbody>
+          <tr align="center">
+          <% @seats.each do |seat| %>
+            
+            <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
+            <% if Date.today.wday == @non_business_day %>
+              <td class="text-center text-dark"><%= tomorrow_seat_result(seat) %></td>
+            <% elsif @reservation_time %>
+              <td class="text-cente text-dark"><%= now_seat_result(seat, @start_at, @end_at) %></td>
+            <% else %>
+              <% if @display_time < @open_time %>
+                <td class="text-center text-dark"><%= next_seat_result(seat) %></td>
+              <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
+                <td class="text-center text-dark"><%= day_after_tomorrow_seat_result(seat) %></td>
+              <% elsif @display_time >= @close_time %>
+                <td class="text-center"><%= tomorrow_seat_result(seat) %></td>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-        </tr>
-      </tbody>
-    </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
     <%= image_tag 'CAFE_seat.jpg', class: "d-flex img-fluid" %>
   </div>

@@ -11,6 +11,15 @@ ja:
         name: メニュー名
         introduction: メニュー説明
         price: 税抜価格
+      customer:
+        customer: 会員
+        email: メールドレス
+        password: パスワード
+        last_name: 苗字
+        first_name: 名前
+        last_name_kana: 苗字(カナ)
+        first_name_kana: 名前(カナ)
+        telephone_number: 電話番号
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -193,4 +202,5 @@ ja:
       short: "%m/%d %H:%M"
       time: "%H:%M"
       minutes: "%M"
+      date: "%Y年%m月%d日(%a)"
     pm: 午後

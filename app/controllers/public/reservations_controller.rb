@@ -33,7 +33,7 @@ class Public::ReservationsController < ApplicationController
     if @reservation.save
       redirect_to my_page_path(@reservation)
     else
-      redirect_to reservations_path(seat_id: @reservation.seat_id), notice: '予約できませんでした。入力内容を確認してください。'
+      redirect_to reservations_path(seat_id: @reservation.seat_id, since_today: params[:since_today]), notice: '予約できませんでした。入力内容を確認してください。'
     end
   end
   
