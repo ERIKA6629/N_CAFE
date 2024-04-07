@@ -1,10 +1,32 @@
-<%= image_tag @menu.image.variant(resize: "200x200").processed %><br>
-メニューID<%= @menu.id %><br>
-ジャンル<%= @menu.genre.name %><br>
-メニュー名<%= @menu.name %><br>
-メニュー説明<%= safe_join(@menu.introduction.split("\n"),tag(:br)) %><br>
-税込価格<%= @menu.include_tax %>円<br>
-税抜価格<%= @menu.price %>円<br>
-ステータス<%= @menu.is_sold_out ? '販売停止中' : '販売中' %><br>
-<%= link_to "編集", edit_admin_menu_path(@menu.id) %>
-<%= link_to '削除', admin_menu_path(@menu.id), method: :delete, "data-confirm" => "本当に削除しますか?" %>
+<div class="row my-3 mx-auto">
+      <div class="col-md-12 col-lg-5 mb-3">
+        <div class="d-flex justify-content-center">
+          <%= image_tag @menu.image.variant(resize: "300x300").processed, class: "img-fluid" %>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row row-cols-1 row-cols-md-4 row-cols-lg-7">
+          <div class="col col-md-4 col-lg-4">メニューID</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.id %></div>
+          <div class="col col-md-4 col-lg-4">ジャンル</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.genre.name %></div>
+          <div class="col col-md-4 col-lg-4">メニュー名</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.name %></div>
+          <div class="col col-md-4 col-lg-4">メニュー説明</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= safe_join(@menu.introduction.split("\n"),tag(:br)) %></div>
+          <div class="col col-md-4 col-lg-4">税込価格</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.include_tax %>円</div>
+          <div class="col col-md-4 col-lg-4">税抜価格</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.price %>円</div>
+          <div class="col col-md-4 col-lg-4">ステータス</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.is_sold_out ? '販売停止中' : '販売中' %></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 offset-lg-2 mt-3">
+        <%= link_to "編集", edit_admin_menu_path(@menu.id), class: 'btn btn-outline-primary btn-block' %>
+      </div>
+      <div class="col-md-6 col-lg-4 mt-3">
+        <%= link_to '削除', admin_menu_path(@menu.id), method: :delete, "data-confirm" => "本当に削除しますか?", class: 'btn btn-danger btn-block' %>
+      </div>
+
+</div>

@@ -1,31 +1,26 @@
-<div class="row">
+<div class="row my-3 mx-auto">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <h2>メニュー一覧</h2>
-    <%= link_to "新規登録", new_admin_menu_path %>
-    <%= link_to "ジャンル管理", admin_genres_path %><br>
-    
+    <div class="d-flex justify-content-between">
+      <div><%= link_to "新規登録", new_admin_menu_path, class: 'btn btn-outline-success btn-block' %></div>
+      <div><%= link_to "ジャンル管理", admin_genres_path, class: 'btn btn-outline-primary btn-block' %></div>
+    </div>
     <% @genres.each do |genre| %> 
-      <%= genre.name %>
-      <table>
-        <thead>
-          <th>メニュー名</th>
-          <th>税抜価格</th>
-          <th>ステータス</th>
-        </thead>
-        <% genre.menus.each do |menu| %>
-          <tbody>
-            <td>
-              <%= link_to menu.name, admin_menu_path(menu.id) %>
-            </td>
-            <td>
-              <%= menu.price %>
-            </td>
-            <td>
-              <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
-            </td>
-          </tbody>
-        <% end %>
-      </table>
+      <div class="mt-3"><%= genre.name %></div>
+      <% genre.menus.each do |menu| %>
+        <div class="row row-cols-md-3 row-cols-lg-3 mt-2 row-cols-2 text-center">
+          <div class="col col-md col-lg">
+            <%= link_to menu.name, admin_menu_path(menu.id) %>
+          </div>
+          <div class="col col-md col-lg">
+            <%= menu.price %>円
+          </div>
+          <div class="col col-md col-lg">
+            <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
+    <div class="text-center mt-3">(税抜価格)</div>
   </div>
 </div>
