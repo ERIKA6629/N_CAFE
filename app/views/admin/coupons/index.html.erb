@@ -1,20 +1,20 @@
-<%= @customer.last_name_kana + " " + @customer.first_name_kana + "様クーポン一覧" %>
-
-<table>
-  <thead>
-    <th>クーポンID</th>
-    <th>付与日時</th>
-    <th>更新日時</th>
-    <th>ステータス</th>
-  </thead>
-  <tbody>
-    <% @coupons.each do |coupon| %>
-      <tr>
-        <td><%= coupon.id %></td>
-        <td><%= l coupon.created_at, format: :long %></td>
-        <td><%= l coupon.updated_at, format: :long %></td>
-        <td><%= coupon.is_active ? '有効' : '使用済み' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="m-3">
+  <div>
+    <%= @customer.last_name_kana + " " + @customer.first_name_kana %> 様
+  </div>
+  <div>クーポン一覧</div>
+  <div class="row mt-3 text-center">
+    <div class="col-12 col-md-2 bg-light">クーポンID</div>
+    <div class="col-12 col-md-4 bg-light">付与日時</div>
+    <div class="col-12 col-md-4 bg-light">更新日時</div>
+    <div class="col-12 col-md-2 bg-light">ステータス</div>
+  </div>
+  <% @coupons.each do |coupon| %>
+    <div class="row border border-secondary rounded mt-2 text-center">
+      <div class="col-12 col-md-2"><%= coupon.id %></div>
+      <div class="col-12 col-md-4"><%= l coupon.created_at, format: :long %></div>
+      <div class="col-12 col-md-4"><%= l coupon.updated_at, format: :long %></div>
+      <div class="col-12 col-md-2"><%= coupon.is_active ? '有効' : '使用済み' %></div>
+    </div>
+  <% end %>
+</div>

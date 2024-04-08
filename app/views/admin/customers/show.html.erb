@@ -1,43 +1,55 @@
-<%= @customer.last_name + @customer.first_name + "様"%>
-
-<p>会員ID</p>
-<%= @customer.id %>
-<p>氏名</p>
-<%= @customer.last_name %>
-<%= @customer.first_name %>
-
-<p>フリガナ</p>
-<%= @customer.last_name_kana %>
-<%= @customer.first_name_kana %>
-
-<p>電話番号</p>
-<%= @customer.telephone_number %>
-
-<p>メールアドレス</p>
-<%= @customer.email %>
-
-<p>ステータス</p>
-<%= @customer.is_active ? '有効' : '退会' %><br>
-
-<%= link_to "編集", edit_admin_customer_path(@customer.id) %>
-
-<h2>ポイント</h2>
-総獲得数：
-<%= @points.count %>Pt
-<% if @points.count > 0 %>
-  直近獲得日:<%= l @latest_point.created_at, format: :long %>
-<% end %>
-<%= form_with model: @point, url: admin_points_path do |f| %>
-  <%= f.hidden_field :customer_id, value: @customer.id %>
-  <%= f.submit 'ポイント付与' %>
-<% end %>
-
-<h2>クーポン</h2>
-<p>総獲得数</p><%= @coupons.count %>枚
-<% if @coupons.count > 0 %>
-  直近獲得日:<%= l @latest_coupon.created_at, format: :long %>
-  <%= form_with model: @coupon, url: admin_coupon_path do |f| %>
-    <%= f.submit 'クーポン利用' %>
-  <% end %>
-  <%= link_to "クーポン一覧", admin_customer_coupons_path(@customer) %>
-<% end %>
+<div class="row my-3 mx-auto">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="h3"><%= @customer.last_name + " " + @customer.first_name + " " + "様"%></div>
+    
+    <div class="border rounded py-2 px-3">
+      <div class="row row-cols-5">
+        <div class="col-12 col-md-4">会員ID</div>
+        <div class="text-center col-12 col-md-8"><%= @customer.id %></div>
+        <div class="col-12 col-md-4">氏名</div>
+        <div class="text-center col-12 col-md-8">
+          <%= @customer.last_name %>
+          <%= @customer.first_name %>
+        </div>
+        
+        <div class="col-12 col-md-4">フリガナ</div>
+        <div class="text-center col-12 col-md-8"><%= @customer.last_name_kana %>
+        <%= @customer.first_name_kana %></div>
+        
+        <div class="col-12 col-md-4">電話番号</div>
+        <div class="text-center col-md-8"><%= @customer.telephone_number %></div>
+        
+        <div class="col-12 col-md-4">メールアドレス</div>
+        <div class="text-center col-md-8"><%= @customer.email %></div>
+        
+        <div class="col-12 col-md-4">ステータス</div>
+        <div class="text-center col-md-8"><%= @customer.is_active ? '有効' : '退会' %></div>
+      </div>
+    </div>
+    
+    <%= link_to "編集", edit_admin_customer_path(@customer.id), class: 'btn btn-outline-primary btn-block mt-3' %>
+    
+    <div class="h3 mt-3">ポイント</div>
+    <div class="text-center">
+      総獲得数：
+      <%= @points.count %>Pt
+      <% if @points.count > 0 %>
+        直近獲得日:<%= l @latest_point.created_at, format: :long %>
+      <% end %>
+    </div>
+    <%= form_with model: @point, url: admin_points_path do |f| %>
+      <%= f.hidden_field :customer_id, value: @customer.id %>
+      <%= f.submit 'ポイント付与', class: 'btn btn-outline-warning btn-block' %>
+    <% end %>
+    
+    <div class="h3 mt-3">クーポン</div>
+    <div class="text-center">総獲得数 : <%= @coupons.count %>枚</div>
+    <% if @coupons.count > 0 %>
+      <div class="text-center">直近獲得日:<%= l @latest_coupon.created_at, format: :long %></div>
+      <%= form_with model: @coupon, url: admin_coupon_path do |f| %>
+        <%= f.submit 'クーポン利用', class: 'btn btn-outline-warning btn-block' %>
+      <% end %>
+      <%= link_to "クーポン一覧", admin_customer_coupons_path(@customer), class: 'btn btn-outline-info btn-block mt-3' %>
+    <% end %>
+  </div>
+</div>

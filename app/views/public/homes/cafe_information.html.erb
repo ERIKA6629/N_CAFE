@@ -22,7 +22,7 @@
     
     <p class="h5">座席番号をクリックすると、各座席の予約表を表示することができます。</p>
     
-    <div class="table-responsive-sm table-responsive-md table-responsive-lg">
+    <div class="table-responsive-sm">
       <table class="table table-bordered">
         <thead>
           <% @seats.each do |seat| %>
@@ -67,8 +67,8 @@
     <% @latest_posts.each do |latest_post| %>
       <div class="card mx-auto mt-3" style="max-width: 540px;">
         <div class="row no-gutters">
-          <div class="col-md-4 p-2">
-            <div><%= image_tag latest_post.image.variant(resize: "200x200").processed, class: "d-flex img-fluid" %></div>
+          <div class="col-md-4 p-2 d-flex align-items-center justify-content-center">
+            <div><%= image_tag latest_post.image.variant(resize: "250x250").processed, class: "img-fluid" %></div>
           </div>
           <div class="col-md-8 py-3">
             <div class="card-body">

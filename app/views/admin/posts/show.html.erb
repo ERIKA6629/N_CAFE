@@ -1,7 +1,15 @@
-<h2>投稿詳細</h2>
-<%= image_tag @show_post.image.variant(resize: "200x200").processed %><br>
-<%= @show_post.title %><br>
-<%= safe_join(@show_post.content.split("\n"),tag(:br)) %><br>
-<%= l @show_post.created_at, format: :long %><br>
-<%= link_to '編集', edit_admin_post_path(@show_post.id) %>
-<%= link_to '削除', admin_post_path(@show_post.id), method: :delete, "data-confirm" => "本当に削除しますか?" %>
+<div class="row my-3 mx-auto">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <h2>投稿詳細</h2>
+    <div class="p-2 d-flex align-items-center justify-content-center">
+      <%= image_tag @show_post.image.variant(resize: "250x250").processed, class: "img-fluid" %>
+    </div>
+    <div><%= @show_post.title %></div>
+    <div class="border border-secondary rounded p-2 mt-3"><%= safe_join(@show_post.content.split("\n"),tag(:br)) %></div>
+    <div class="text-right">投稿日時 : <%= l @show_post.created_at, format: :long %></div>
+    <%= link_to '編集', edit_admin_post_path(@show_post.id), class: 'btn btn-outline-primary btn-block mt-3' %>
+    <div class="d-flex justify-content-end">
+      <%= link_to '削除', admin_post_path(@show_post.id), method: :delete, "data-confirm" => "本当に削除しますか?", class: 'btn btn-danger mt-3' %>
+    </div>
+  </div>
+</div>

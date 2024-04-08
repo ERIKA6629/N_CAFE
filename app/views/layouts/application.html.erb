@@ -12,6 +12,7 @@
   <body class="d-flex flex-column">
     <header class="border-bottom border-dark">
       <nav class="navbar navbar-expand-lg navbar-light">
+        
         <% if admin_signed_in? %>
           <% if content_for?(:admin_path_with_date) %>
             <%= yield(:admin_path_with_date) %>
@@ -29,6 +30,9 @@
           
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+              <li class="nav-item px-3 h5">
+                <%= link_to "予約一覧", admin_path, class: 'text-dark' %>
+              </li>
               <li class="nav-item px-3 h5">
                 <%= link_to "メニュー", admin_menus_path, class: 'text-dark' %>
               </li>
