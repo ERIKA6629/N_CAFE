@@ -1,23 +1,37 @@
+
+
 <div class="bg-danger text-center text-white">
   N CAFEは架空の店舗です。閲覧できる情報は存在しません。
 </div>
 
-<div class="text-center h4 mt-5">
-  <p>ようこそ N CAFEへ</p>
-  <p>予定の合間にちょこっと利用していただけるよう</p>
-  <p>空席情報をご覧いただけます。</p>
-  
-  <p>ランチやスイーツもご用意していますので</p>
-  <p>お昼時をのんびり過ごしたい方にも</p>
-  
-  <p>いろんな方にとって</p>
-  <p>ちょうど良いCAFEを目指しています。</p>
+<div class="card border border-0 mx-auto" style="max-width: 800px;">
+  <%= image_tag 'top_image.jpg', class: "img-fluid" %>
+  <div class="card-img-overlay d-flex flex-column justify-content-center" , style="background-color:rgba(255,255,255,0.4);">
+    <h4>ようこそ N CAFEへ</h4>
+    <p>
+      予定の合間にちょこっと利用していただけるよう
+      空席情報をご覧いただけます。</br>
+      ランチやスイーツもご用意していますので
+      お昼時をのんびり過ごしたい方にも</br>
+      いろんな方にとって
+      ちょうど良いCAFEを目指しています。
+    </p>
+    <div class="d-flex flex-row mt-3 mx-auto">
+      <div class="d-none d-md-block mt-3 mr-3" style="width: 150px;"><%= link_to "会員登録", new_customer_registration_path, class: 'btn btn-outline-success btn-block' %></div>
+      
+      <div class="d-none d-md-block mt-3 mr-3" style="width: 150px;"><%= link_to "ログイン", new_customer_session_path, class: 'btn btn-outline-primary btn-block' %></div>
+      
+      <div class="d-none d-md-block mt-3" style="width: 150px;"><%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'btn btn-outline-info btn-block' %></div>
+    
+    </div>
+  </div>
 </div>
-<div class="row d-flex justify-content-center mb-3">
-  <div class="col-md-3 col-lg-3 d-flex justify-content-center mt-3"><%= link_to "会員登録", new_customer_registration_path, class: 'btn btn-outline-success btn-block' %></div>
   
-  <div class="col-md-3 col-lg-3 d-flex justify-content-center mt-3"><%= link_to "ログイン", new_customer_session_path, class: 'btn btn-outline-primary btn-block' %></div>
+<div class="d-flex flex-column">
+  <div class="m-2 d-md-none"><%= link_to "会員登録", new_customer_registration_path, class: 'btn btn-outline-success btn-block' %></div>
   
-  <div class="col-md-3 col-lg-3 d-flex justify-content-center mt-3"><%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'btn btn-outline-info btn-block' %></div>
+  <div class="m-2 d-md-none"><%= link_to "ログイン", new_customer_session_path, class: 'btn btn-outline-primary btn-block' %></div>
+  
+  <div class="m-2 d-md-none"><%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: 'btn btn-outline-info btn-block' %></div>
 
 </div>

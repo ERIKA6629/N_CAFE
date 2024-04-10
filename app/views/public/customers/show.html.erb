@@ -1,8 +1,8 @@
 <div class="row my-3">
   <div class="col-md-12 col-lg-8 offset-lg-2">
-    <h2>マイページ</h2>
+    <div class="p-2 text-white", style="background-color: midnightblue;">マイページ</div>
     
-    <div class="bg-warning rounded p-1 mt-3">ポイント</div>
+    <div class="bg-warning p-2 mt-3">ポイント</div>
     <p>1回ご来店につき1ポイントプレゼント！</p>
     <p>※お会計の際にマイページをご提示ください</p>
     <% if @point.empty? %>
@@ -11,7 +11,7 @@
       <%= @point.count %>Pt
     <% end %>
 
-    <div class="bg-warning rounded p-1 mt-3">獲得クーポン</div>
+    <div class="bg-warning p-2 mt-3">獲得クーポン</div>
     <p>次回お会計時にご利用可　※お会計の際にマイページをご提示ください</p>
     <% if @coupon.empty? %>
       <%= "まだ獲得されていません" %>
@@ -24,7 +24,7 @@
       </div>
     <% end %>
     
-    <div class="bg-warning rounded p-1 mt-3">予約状況</div>
+    <div class="bg-warning p-2 mt-3">予約状況</div>
     <% if @reservations.empty? %>
       <p>予約はありません。</p>
     <% end %>
@@ -50,7 +50,7 @@
       <% end %>
     <% end %>
     
-    <div class="bg-warning rounded p-1 mt-3">登録内容</div>
+    <div class="bg-warning p-2 mt-3">登録内容</div>
       <div class="row row-cols-md-6 row-cols-lg-6 p-1">
         
         <div class="col-md-5 col-lg-4 mt-2">

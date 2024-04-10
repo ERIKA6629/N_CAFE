@@ -1,26 +1,24 @@
 <div class="row ax-auto mt-3">
   <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-    <h2>座席状況</h2>
+    <div class="text-white p-2", style="background-color: midnightblue;">座席状況</div>
     
-    <p class="h5"><%= l @display_time, format: :long %>時点</p>
+    <p class="mt-3"><%= l @display_time, format: :long %>時点</p>
     <% if Date.today.wday == @non_business_day %>
-      <p class="h5">本日は定休日です。表示は金曜日10:00~10:30の座席状況です</p>
+      <p>本日は定休日です。表示は金曜日10:00~10:30の座席状況です</p>
     <% elsif @reservation_time %>
-      <p class="h5">営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。</p>
+      <p>営業中です。表示は<%= @reservation_time.start_at + "〜" + @reservation_time.end_at %>の座席状況です。</p>
     <% else %>
       <% if @display_time < @open_time %>
-        <p class="h5">現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
+        <p>現在は営業時間前です。表示は本日10:00~10:30の座席状況です。</p>
       <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
-        <p class="h5">現在は営業時間外です。</p>
-        <p class="h5">また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
+        <p>現在は営業時間外です。</p>
+        <p>また、明日は定休日です。表示は金曜日10:00~10:30の座席状況です。</p>
       <% elsif @display_time >= @close_time %>
-        <p class="h5">現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
-      <% else %>
-        ohhhh!
+        <p>現在は営業時間外です。表示は翌営業日10:00~10:30の座席状況です。</p>
       <% end %>
     <% end %>
     
-    <p class="h5">座席番号をクリックすると、各座席の予約表を表示することができます。</p>
+    <p>座席番号をクリックすると、各座席の予約表を表示することができます。</p>
     
     <div class="table-responsive-sm">
       <table class="table table-bordered">
@@ -63,7 +61,7 @@
 
 <div class="row mt-3 mb-3">
   <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-    <h2>最新情報</h2>
+    <div class="text-white p-2", style="background-color: midnightblue;">最新情報</div>
     <% @latest_posts.each do |latest_post| %>
       <div class="card mx-auto mt-3" style="max-width: 540px;">
         <div class="row no-gutters">
