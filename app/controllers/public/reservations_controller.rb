@@ -42,9 +42,13 @@ class Public::ReservationsController < ApplicationController
   end
   
   def update
-    reservation = Reservation.find(params[:id])
-    reservation.update!(reservation_update_params)
-    redirect_to my_page_path(reservation)
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(reservation_update_params)
+      redirect_to my_page_path(@reservation)
+    else
+      flash[:notice] = '変更できませんでした。入力内容を確認してください。'
+      render :edit
+    end
   end
   
   def destroy

@@ -22,11 +22,26 @@ class Admin::GenresController < ApplicationController
   
   def update
     genre = Genre.find(params[:id])
-    genre.update(genre_params)
-    redirect_to admin_genres_path
+    if genre.update(genre_params)
+      redirect_to admin_genres_path
+    else
+      @genre = genre
+      render :edit
+    end
   end
   
-
+  def destroy
+    @genre = Genre.find(params[:id])
+    if !@genre.menus.any?
+      @genre.destroy
+      redirect_to admin_genres_path
+    else
+      @genres = Genre.all
+      @genre = Genre.new
+      flash[:notice] = 'ジャンルを削除できませんでした。'
+      render :index
+    end
+  end
   
   private
   

@@ -1,20 +1,19 @@
+<div class="text-white p-2", style="background-color: midnightblue;">ログイン</div>
 <div class="row my-3 mx-auto">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <h2>ログイン</h2>
-    
     <%= form_with model: @customer, url: customer_session_path do |f| %>
     
-      <div class="form-group h5 mt-3">
+      <div class="form-group mt-3">
         <%= f.label "メールアドレス" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
     
-      <div class="form-group h5 mt-3">
+      <div class="form-group mt-3">
         <%= f.label "パスワード" %>
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
       </div>
     
-      <div class="form-group h5 mt-5">
+      <div class="form-group mt-5">
         <%= f.submit "ログイン", class: 'btn btn-outline-primary btn-block' %>
       </div>
     <% end %>

@@ -2,6 +2,23 @@
   <div class="col-md-12 col-lg-8 offset-lg-2">
     <div class="p-2 text-white", style="background-color: midnightblue;">マイページ</div>
     
+    <div class="card border-secondary my-3 mx-auto" style="max-width: 450px; background-color: midnightblue;">
+      <div class="row no-gutters">
+        <div class="col-sm-4 mx-auto">
+          <div class="d-flex justify-content-center">
+          <%= image_tag 'n_cafe_logo.jpg', class: "img-fluid" %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="card-body text-center text-white">
+            <h5 class="card-title text-md-left">会員ID：<%= @customer.id %></h5>
+            <p class="card-text h5 mt-3 text-md-left"><%= @customer.last_name + " " + @customer.first_name %></p>
+            <p class="card-text h5 mt-3 text-md-left"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="bg-warning p-2 mt-3">ポイント</div>
     <p>1回ご来店につき1ポイントプレゼント！</p>
     <p>※お会計の際にマイページをご提示ください</p>

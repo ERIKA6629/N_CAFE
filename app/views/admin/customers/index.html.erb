@@ -1,9 +1,11 @@
+<div class="text-white p-2", style="background-color: midnightblue;">会員一覧</div>
 <div class="row my-3 mx-auto">
+  
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <h2>会員一覧</h2>
+    
     
     <%= form_with url: admin_search_path, method: :get do |f| %>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end mt-3">
         <%= f.text_field :id, placeholder: "IDで検索", class: "mr-2" %>
         <%= f.submit "検索", class: "btn btn-outline-warning" %>
       </div>
