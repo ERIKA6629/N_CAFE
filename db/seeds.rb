@@ -8,7 +8,7 @@
 
 Admin.create!(
   email: 'n_cafe@example.com',
-  password: ADMIN_LOGIN_KEY
+  password: ENV['ADMIN_LOGIN_KEY']
   )
   
 seats_data = [ ["T1", 4], ["T2", 2], ["T3", 2], ["T4", 2], ["C1", 1], ["C2", 1], ["C3", 1] ]
@@ -27,7 +27,7 @@ Customer.create!(
   last_name_kana: 'アドミン',
   first_name_kana: 'アドミン',
   email: 'n_cafe@example.com',
-  password: 'n_cafe1',
+  password: ENV['ADMIN_LOGIN_KEY'],
   telephone_number: '00000000000'
   
   )
