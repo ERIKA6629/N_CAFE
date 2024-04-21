@@ -15,8 +15,10 @@ class Menu < ApplicationRecord
   private
   
   def image_size
-    if image.blob.byte_size > 4.megabytes
-      errors.add(:image, "は1つのファイル5MB以内にしてください")
+    if image.attached?
+      if image.blob.byte_size > 4.megabytes
+        errors.add(:image, "は1つのファイル4MB以内にしてください")
+      end
     end
   end
   
