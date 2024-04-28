@@ -4,12 +4,12 @@
     <%= form_with model: @customer, url: customer_session_path do |f| %>
     
       <div class="form-group mt-3">
-        <%= f.label "メールアドレス" %>
+        <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
     
       <div class="form-group mt-3">
-        <%= f.label "パスワード" %>
+        <%= f.label :password %>
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
       </div>
     

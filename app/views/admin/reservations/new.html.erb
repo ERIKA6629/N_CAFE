@@ -14,12 +14,12 @@
       <div class="border border-dark rounded bg-light py-1 px-2 mt-1">管理者</div>
       
       <div class="form-group mt-3">
-        <%= f.label "予約人数" %>
+        <%= f.label :number_of_people %>
         <%= f.select :number_of_people, *[1..@reservation.seat.limit_number], { include_blank: "---select---" }, {class: "form-control border-dark"} %>
         <div class="text-right">人</div>
       </div>
       <div class="form-group mt-3">
-        <%= f.label "コメント" %>
+        <%= f.label :comment %>
         <%= f.text_area :comment, class: "form-control border-dark", row: "5" %>
       </div>
       <%= f.hidden_field :seat_id, value: @reservation.seat.id %>

@@ -14,16 +14,27 @@ ja:
         price: 税抜価格
       customer:
         customer: 会員
-        email: メールドレス
+        email: メールアドレス
         password: パスワード
         last_name: 苗字
         first_name: 名前
         last_name_kana: 苗字(カナ)
         first_name_kana: 名前(カナ)
         telephone_number: 電話番号
+        is_active: ステータス
+        is_active_true: 有効
+        is_active_false: 退会
+        password_confirmation: パスワード(確認用)
       genre:
         name: ジャンル名
         image: 画像
+      reservation:
+        customer_id: 会員ID
+        comment: コメント
+        number_of_people: 予約人数
+      admin:
+        email: メールアドレス
+        password: パスワード
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
