@@ -19,7 +19,7 @@ class Public::HomesController < ApplicationController
     @reservation_time = ReservationTime.find_by(start_at: @start_at, end_at: @end_at)
     @reservations = Reservation.all
     
-    @latest_posts = Post.order('created_at DESC').last(5)
+    @latest_posts = Post.order('created_at DESC').first(5)
   end
   
   private
