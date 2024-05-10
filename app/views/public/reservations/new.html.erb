@@ -1,4 +1,4 @@
-<div class="text-white p-2", style="background-color: midnightblue;"><%= @reservation.seat.name %>の座席予約</div>
+<div class="text-white p-2 style_color"><%= @reservation.seat.name %>の座席予約</div>
 <div class="row mx-auto my-3">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <%= form_with model: @reservation, url: reservations_path do |f| %>

@@ -1,4 +1,4 @@
-<div class="text-white p-2", style="background-color: midnightblue;">メニュー</div>
+<div class="text-white p-2 style_color">メニュー</div>
 <div class="d-flex justify-content-end">
     <div class="d-flex align-items-end">表示は税込価格です</div>
 </div>
@@ -19,7 +19,7 @@
               <% if menu.is_sold_out == false %>
                 <div class="row">
                   <div class="col-8 col-md-8 col-lg-8 h5"><%= link_to menu.name, menu_path(menu.id), class: "text-dark" %></div>
-                  <div class="col-4 col-md-4 col-lg-4 h5"><%= menu.include_tax %>円</div>
+                  <div class="col-4 col-md-4 col-lg-4 h5"><%= menu.include_tax.to_s(:delimited) %>円</div>
                 </div>
               <% end %>
             <% end %>

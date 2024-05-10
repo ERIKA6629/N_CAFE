@@ -1,4 +1,4 @@
-<div class="text-white p-2 mt-3", style="background-color: midnightblue;">新規投稿</div>
+<div class="text-white p-2 mt-3 style_color">新規投稿</div>
 <div class="row my-3 mx-auto">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <%= link_to '投稿一覧', admin_posts_path, class: 'btn btn-outline-warning btn-block' %>
@@ -23,7 +23,7 @@
         <%= f.text_field :title, class: "form-control border-dark" %>
       </div>
       <div class="form-group">
-        <%= f.label :content %>
+        <%= f.label :content %> (150字以内で入力してください)
         <%= f.text_area :content, class: "form-control border-dark", rows: "5" %>
       </div>
       <%= f.submit '投稿', class: 'btn btn-outline-primary btn-block mt-5' %>

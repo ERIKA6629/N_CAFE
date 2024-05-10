@@ -15,9 +15,9 @@
           <div class="col col-md-4 col-lg-4">メニュー説明</div>
           <div class="col col-md-8 col-lg-8 px-4"><%= safe_join(@menu.introduction.split("\n"),tag(:br)) %></div>
           <div class="col col-md-4 col-lg-4">税込価格</div>
-          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.include_tax %>円</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.include_tax.to_s(:delimited) %>円</div>
           <div class="col col-md-4 col-lg-4">税抜価格</div>
-          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.price %>円</div>
+          <div class="col col-md-8 col-lg-8 px-4"><%= @menu.price.to_s(:delimited) %>円</div>
           <div class="col col-md-4 col-lg-4">ステータス</div>
           <div class="col col-md-8 col-lg-8 px-4"><%= @menu.is_sold_out ? '販売停止中' : '販売中' %></div>
         </div>

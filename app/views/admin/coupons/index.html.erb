@@ -3,7 +3,7 @@
     <%= @customer.last_name_kana + " " + @customer.first_name_kana %> 様
   </div>
   
-  <div class="text-white p-2", style="background-color: midnightblue;">クーポン一覧</div>
+  <div class="text-white p-2 style_color">クーポン一覧</div>
   <div class="row mt-3">
     <div class="col-7 d-flex align-items-end justify-content-center">有効クーポン枚数：<%= @coupons.where(is_active: :true).count %>枚</div>
     <div class="col-5 d-flex justify-content-end"><%= link_to "会員詳細に戻る", admin_customer_path(@customer.id), class: "btn btn-outline-warning" %></div>

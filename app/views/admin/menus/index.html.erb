@@ -1,4 +1,4 @@
-<div class="text-white p-2", style="background-color: midnightblue;">メニュー一覧</div>
+<div class="text-white p-2 style_color">メニュー一覧</div>
 
 <div class="row my-3 mx-auto">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
@@ -14,7 +14,7 @@
             <%= link_to menu.name, admin_menu_path(menu.id) %>
           </div>
           <div class="col col-md col-lg">
-            <%= menu.price %>円
+            <%= menu.price.to_s(:delimited) %>円
           </div>
           <div class="col col-md col-lg">
             <%= menu.is_sold_out ? '販売停止中' : '販売中' %>
