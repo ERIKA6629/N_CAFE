@@ -1,6 +1,7 @@
 class Public::ReservationsController < ApplicationController
   before_action :authenticate_customer!
   before_action :set_beginning_of_week
+  before_action :check_user, only: [:edit]
   
   def index
     @non_business_day = 4
@@ -75,5 +76,11 @@ class Public::ReservationsController < ApplicationController
     Date.beginning_of_week = :sunday
   end
   
+  def check_user
+    reservation = Reservation.find(params[:id])
+    if current_customer.id != reservation.customer_id
+      redirect_to public_top_path , notice: 'ご自身以外の予約編集画面へ遷移できません。'
+    end
+  end
   
 end
