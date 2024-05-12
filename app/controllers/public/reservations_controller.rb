@@ -1,7 +1,7 @@
 class Public::ReservationsController < ApplicationController
   before_action :authenticate_customer!
   before_action :set_beginning_of_week
-  before_action :check_user, only: [:edit]
+  before_action :check_user, only: [:edit, :update, :destroy]
   
   def index
     @non_business_day = 4
@@ -39,11 +39,9 @@ class Public::ReservationsController < ApplicationController
   end
   
   def edit
-    @reservation = Reservation.find(params[:id])
   end
   
   def update
-    @reservation = Reservation.find(params[:id])
     if @reservation.update(reservation_update_params)
       redirect_to my_page_path(@reservation)
     else
@@ -53,8 +51,7 @@ class Public::ReservationsController < ApplicationController
   end
   
   def destroy
-    reservation = Reservation.find(params[:id])
-    reservation.destroy
+    @reservation.destroy
     redirect_to my_page_path(current_customer.id)
   end
   
@@ -77,8 +74,8 @@ class Public::ReservationsController < ApplicationController
   end
   
   def check_user
-    reservation = Reservation.find(params[:id])
-    if current_customer.id != reservation.customer_id
+    @reservation = current_customer.reservations.find_by_id(params[:id])
+    unless @reservation
       redirect_to public_top_path , notice: 'ご自身以外の予約編集画面へ遷移できません。'
     end
   end
