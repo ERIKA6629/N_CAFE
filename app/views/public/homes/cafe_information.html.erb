@@ -19,47 +19,39 @@
     <% end %>
     
     <p>座席番号をクリックすると、各座席の予約表を表示することができます。</p>
-    
-    <div class="table-responsive-sm">
-      <table class="table table-bordered">
-        <thead>
-          <% @seats.each do |seat| %>
-            <th class="px-0 text-center table-secondary">
-              <%= link_to reservations_path(seat_id: seat.id) do %>
-                <div class="text-dark"><%= seat.name %></div>
-              <% end %>
-            </th>
-          <% end %>
-        </thead>
-        <tbody>
-          <tr align="center">
-          <% @seats.each do |seat| %>
-            
-            <%# if @reservations.display_reservation(seat.id, @reservation_time.id, @reservation_date).nil? %>
+    <div class="d-flex justify-content-between flex-wrap">   
+      <% @seats.each do |seat| %>
+        <div class="d-flex flex-column bg-warning text-center rounded p-2 my-1">
+          <div>
+            <%= link_to reservations_path(seat_id: seat.id) do %>
+              <div class="text-dark btn btn-light"><%= seat.name %></div>
+            <% end %>
+          </div>
+          <div class="p-2">
             <% if Date.today.wday == @non_business_day %>
-              <td class="text-center text-dark"><%= tomorrow_seat_result(seat) %></td>
+              <%= tomorrow_seat_result(seat) %>
             <% elsif @reservation_time %>
-              <td class="text-cente text-dark"><%= now_seat_result(seat, @start_at, @end_at) %></td>
+              <%= now_seat_result(seat, @start_at, @end_at) %>
             <% else %>
               <% if @display_time < @open_time %>
-                <td class="text-center text-dark"><%= next_seat_result(seat) %></td>
+                <%= next_seat_result(seat) %>
               <% elsif Date.today.tomorrow.wday == @non_business_day && @display_time >= @close_time %>
-                <td class="text-center text-dark"><%= day_after_tomorrow_seat_result(seat) %></td>
+                <%= day_after_tomorrow_seat_result(seat) %>
               <% elsif @display_time >= @close_time %>
-                <td class="text-center"><%= tomorrow_seat_result(seat) %></td>
+                <%= tomorrow_seat_result(seat) %>
               <% end %>
             <% end %>
-          <% end %>
-          </tr>
-        </tbody>
-      </table>
+          </div>
+        </div>
+      <% end %>
     </div>
+
     
     <%= image_tag 'CAFE_seat.jpg', class: "d-flex img-fluid" %>
   </div>
 </div>
 
-<div class="text-white p-2 style_color">最新情報</div>
+<div class="text-white p-2 style_color mt-3">最新情報</div>
 <div class="row mt-3 mb-3">
   <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
     <% @latest_posts.each do |latest_post| %>
