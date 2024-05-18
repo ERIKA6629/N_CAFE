@@ -30,6 +30,7 @@ class Admin::PostsController < ApplicationController
   def update
     edit_post = Post.find(params[:id])
     if edit_post.update(edit_post_params)
+      sleep(3) #S3への画像反映のタイムラグを考慮して3秒待機
       redirect_to admin_post_path(edit_post.id)
     else
       @edit_post = edit_post

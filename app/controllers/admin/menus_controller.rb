@@ -29,6 +29,7 @@ class Admin::MenusController < ApplicationController
   def update
     @menu = Menu.find(params[:id])
     if @menu.update(menu_params)
+      sleep(3) #S3への画像反映のタイムラグを考慮して3秒待機
       redirect_to admin_menu_path(@menu.id)
     else
       render :edit

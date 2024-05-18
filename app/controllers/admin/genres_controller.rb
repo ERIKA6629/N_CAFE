@@ -23,6 +23,7 @@ class Admin::GenresController < ApplicationController
   def update
     genre = Genre.find(params[:id])
     if genre.update(genre_params)
+      sleep(3) #S3への画像反映のタイムラグを考慮して3秒待機
       redirect_to admin_genres_path
     else
       @genre = genre
