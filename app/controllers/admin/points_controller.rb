@@ -6,7 +6,7 @@ class Admin::PointsController < ApplicationController
     if @point.save
       redirect_to admin_customer_path(@point.customer_id)
     else
-      
+      redirect_to admin_customer_path(@point.customer_id)
     end
   end
   
